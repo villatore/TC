@@ -516,6 +516,8 @@ console.log('a.............'  + URL);
                         $("#title").html("<a style='color:#FF0000'>No se pudo leer el artículo...</a>");
                         ExisteProducto = false;
                     }
+
+
                     if (Post != undefined){
                         $("#title").html(Post.title);
                         $("#imgs").src=Post.thumbnail.replace(/"\"/g,"");
@@ -527,7 +529,8 @@ console.log('a.............'  + URL);
                         escribeEstado("");
                         ExisteProducto = true;
                         Producto = data;
-                    
+                     }
+
 //                    if (data.post != undefined){
 //                        $("#title").html(data.post.title);
 //                        $(target_div).append(data.post.content);
@@ -553,6 +556,9 @@ console.log('a.............'  + URL);
 //                        $("#title").html("<a style='color:#FF0000'>No se pudo leer el artículo...</a>");
 //                        ExisteProducto = false;
 //                    }
+
+
+
                 } else {
                     LimpiaProducto();
                     $("#title").html("<a style='color:#FF0000'>Está información no fue encontrada, consulte a su asesor...</a>");
