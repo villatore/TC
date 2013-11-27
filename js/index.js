@@ -503,7 +503,7 @@ function Muestra(){
 console.log('a.............'  + URL);
         $.ajax({
             url: URL,
-            dataType: 'jsonp',
+            dataType: 'json',
             success: function (data) {
                 if (data.status != "error") {
                     var Post;
