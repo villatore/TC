@@ -93,7 +93,7 @@
             $('.userId').html(user.userId);
         }
         $('.cantVentas').html(cantVentas);
-        $('.cantComisiones').html(cantComisiones);
+        //$('.cantComisiones').html(cantComisiones);
         // Testing sockets.io:
         var socket = io.connect('http://crm20.intelisis.com:8080');
         socket.on('connect', function () {
@@ -277,7 +277,6 @@
         var li = $('<li/>');
 
         navigator.notification.vibrate(400);
-        navigator.notification.vibrate(100);
         console.log('inicia camara.............');
         navigator.camera.getPicture(onPhotoSuccess, onPhotoFail, 
 		{
@@ -491,9 +490,9 @@ function LimpiaProducto() {
 }
 function Muestra(){
     $.mobile.changePage('#paymentsDetails');
-    $("#contents").html("");
-    var url = $("#qrSKU")[0].value;
     var target_div = "#contents";
+    $(target_div).html("");
+    var url = $("#qrSKU")[0].value;
     readSinglePost(url, target_div);
 
     function readSinglePost(URL, target_div) {
@@ -504,35 +503,56 @@ function Muestra(){
 console.log('a.............'  + URL);
         $.ajax({
             url: URL,
-            dataType: 'json',
+            dataType: 'jsonp',
             success: function (data) {
-console.log('entra con exito.............'  + URL);
                 if (data.status != "error") {
+                    var Post;
                     if (data.post != undefined){
-                        $("#title").html(data.post.title);
-                        $(target_div).append(data.post.content);
-                        $(target_div).append("<small>" + data.post.date + "</small>");
-                        $("#precio").html(data.post.id);
-                        $("#unidad").html(data.post.comment_status);
-                        Resta();
-                        escribeEstado("");
-                        ExisteProducto = true;
-                        Producto = data;
+                        Post=data.post;
                     } else if (data.page != undefined){
-                        $("#title").html(data.page.title);
-                        $(target_div).append(data.page.content);
-                        $(target_div).append("<small>" + data.page.date + "</small>");
-                        $("#precio").html(data.page.custom_fields.mp_sale_price);
-                        $("#unidad").html(data.page.excerpt);
-                        Resta();
-                        escribeEstado("");
-                        ExisteProducto = true;
-                        Producto = data;
+                        Post=data.page;
                     } else {
                         LimpiaProducto();
                         $("#title").html("<a style='color:#FF0000'>No se pudo leer el artículo...</a>");
                         ExisteProducto = false;
                     }
+                    if (Post != undefined){
+                        $("#title").html(Post.title);
+                        $("#imgs").src=Post.thumbnail.replace(/"\"/g,"");
+                        $(target_div).append(Post.content);
+                        $(target_div).append("<small>" + Post.date + "</small>");
+                        $("#precio").html(Post.id);
+                        $("#unidad").html(Post.comment_status);
+                        Resta();
+                        escribeEstado("");
+                        ExisteProducto = true;
+                        Producto = data;
+                    
+//                    if (data.post != undefined){
+//                        $("#title").html(data.post.title);
+//                        $(target_div).append(data.post.content);
+//                        $(target_div).append("<small>" + data.post.date + "</small>");
+//                        $("#precio").html(data.post.id);
+//                        $("#unidad").html(data.post.comment_status);
+//                        Resta();
+//                        escribeEstado("");
+//                        ExisteProducto = true;
+//                        Producto = data;
+//                    } else if (data.page != undefined){
+//                        $("#title").html(data.page.title);
+//                        $(target_div).append(data.page.content);
+//                        $(target_div).append("<small>" + data.page.date + "</small>");
+//                        $("#precio").html(data.page.custom_fields.mp_sale_price);
+//                        $("#unidad").html(data.page.excerpt);
+//                        Resta();
+//                        escribeEstado("");
+//                        ExisteProducto = true;
+//                        Producto = data;
+//                    } else {
+//                        LimpiaProducto();
+//                        $("#title").html("<a style='color:#FF0000'>No se pudo leer el artículo...</a>");
+//                        ExisteProducto = false;
+//                    }
                 } else {
                     LimpiaProducto();
                     $("#title").html("<a style='color:#FF0000'>Está información no fue encontrada, consulte a su asesor...</a>");

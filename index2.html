@@ -77,15 +77,16 @@
         <div data-theme="f" data-role="header">
             <h3>ToruzCart</h3>
              <a href="#mypanel" data-icon="gear" data-iconpos="notext" data-role="button" class="ui-btn-right">Open panel</a>
+             <a class="ui-btn-left"><span id="clock">&nbsp;</span></a>
         </div><!--Fin header-->
         <!--content-->
         <div data-role="content">
         <center>
-            <img src="img/cart_bannerw.jpg" class="crm20-centro">
+            <img src="img/cart_banner.jpg" class="crm20-centro">
         </center>
             <br />
             <ul data-role="listview" data-divider-theme="a" data-inset="true">
-                <li data-role="list-divider" role="heading"><center>Bienvenido  - <span id="clock">&nbsp;</span></center></li>
+                <li data-role="list-divider" role="heading"><center>Bienvenido</center></li>
                 <!--li>
                     <a href="#payments" data-transition="slide" class="icon-camera" style="font-size: xx-large"> Tomar Codigo1234567890</a>
                     <span class="ui-li-count cantComisiones"></span>
@@ -111,7 +112,7 @@
                     <td><center>
                         <a href="#sales" data-transition="slide" class="icon-shopping-cart" style="font-size: 50px"></a>
                         <br /><a href="#sales" data-transition="slide"> Carrito de compras</a>
-                        <span class="ui-li-count cantVentas"></span>
+                        <span style="background-color: #FF6600">&nbsp;<span class="ui-li-count cantVentas"></span>&nbsp;</span>
                         </center></td>
                 </tr>
                 <tr>
@@ -125,6 +126,7 @@
                         </center></td>
                 </tr>
             </table>
+            <img alt ="d" id="img1" src="http:\/\/tienda.toruzcart.com\/wp-content\/uploads\/sites\/2\/2013\/11\/bath-150x150.jpg"></img>
             </center>
         </div><!--Fin content-->
         <!-- Footer -->
@@ -206,7 +208,7 @@
             <input type="text" maxlength="170" length="50" id="qrSKU" value='http://tienda.toruzcart.com/producto/banera-porcelana/?json=get_post&dev=1'/>
             <label><i>http://127.0.0.1:8080/w36/4?json=get_post</i></label><br>
             <label><i>http://127.0.0.1:8080/w36/store/products/zapato-tenis-nike?json=get_post&dev=1</i></label>
-            <input type="button" value="Consultar" onclick="Muestra()"></input>
+            <input type="button" value="Consultar" onclick="Muestra();"></input>
         </div>
         <img style="display:none;width:60px;height:60px;" id="myImage" src="" />
     </div>
@@ -239,6 +241,7 @@
             </div>
 <div id="main">
 <h1><div id="title"></div></h1>
+<img id="imgs" src="http:\/\/tienda.toruzcart.com\/wp-content\/uploads\/sites\/2\/2013\/11\/bath-150x150.jpg"></img>
 <div id="contents"></div>
 <div id="Estado"></div>
 </div>
