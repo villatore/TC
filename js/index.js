@@ -520,17 +520,15 @@ console.log('a.............'  + URL);
 
                     if (Post != undefined){
                         $("#title").html(Post.title);
-                        $("#imgs").src=Post.thumbnail.replace(/"\"/g,"");
+                        //$("#imgs").src=Post.thumbnail.replace(/"\"/g,"");
+                        document.getElementById("imgs").src=Post.thumbnail.replace(/"\"/g,"");
 console.log(Post.thumbnail.replace(/"\"/g,""));
-console.log("#imgs).src" + $("#imgs").src);
-console.log(".imgs).src" + $(".imgs").src);
-console.log("imgs).src" + $("imgs").src);
+console.log("src: --" document.getElementById("imgs").src);
                         $(target_div).append(Post.content);
                         $(target_div).append("<small>" + Post.date + "</small>");
                         $("#precio").html(Post.id);
                         $("#unidad").html(Post.comment_status);
                         $("#categoria").html(Post.taxonomy_product_cat[0].title);
-                        Categoria
                         Resta();
                         escribeEstado("");
                         ExisteProducto = true;
@@ -586,7 +584,7 @@ console.log('falla.............'  + data);
 };
 
 function AgregaCarro() {
-    window.localStorage.setItem("Producto", Producto.post.url);
+    window.localStorage.setItem("Producto", Producto.url);
     return;
         var jsonUser = {  id: json.userId,
                             user: json,
