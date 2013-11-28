@@ -521,6 +521,7 @@ console.log('a.............'  + URL);
                     if (Post != undefined){
                         $("#title").html(Post.title);
                         $("#imgs").src=Post.thumbnail.replace(/"\"/g,"");
+console.log(Post.thumbnail.replace(/"\"/g,""));
                         $(target_div).append(Post.content);
                         $(target_div).append("<small>" + Post.date + "</small>");
                         $("#precio").html(Post.id);
