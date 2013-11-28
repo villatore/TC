@@ -120,7 +120,7 @@
             });
             // Aviso usuario desconectado
             socket.on('user offline', function (data) {
-                console.log('Usuario desconectado ' + data);
+                console.log('socketIO: Usuario desconectado ' + data);
             });
         });
         // test butons
@@ -522,14 +522,19 @@ console.log('a.............'  + URL);
                         $("#title").html(Post.title);
                         $("#imgs").src=Post.thumbnail.replace(/"\"/g,"");
 console.log(Post.thumbnail.replace(/"\"/g,""));
+console.log("#imgs).src" + $("#imgs").src);
+console.log(".imgs).src" + $(".imgs").src);
+console.log("imgs).src" + $("imgs").src);
                         $(target_div).append(Post.content);
                         $(target_div).append("<small>" + Post.date + "</small>");
                         $("#precio").html(Post.id);
                         $("#unidad").html(Post.comment_status);
+                        $("#categoria").html(Post.taxonomy_product_cat[0].title);
+                        Categoria
                         Resta();
                         escribeEstado("");
                         ExisteProducto = true;
-                        Producto = data;
+                        Producto = Post;
                      }
 
 //                    if (data.post != undefined){
