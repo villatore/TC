@@ -60,41 +60,15 @@ function Muestra() {
                         $("#contenido").append(Post.content);
                         $("#contenido").append("<small>" + Post.date + "</small>");
                         $("#actualizacion").html("Ultima actualizacion: " + Post.modified);
+//                        $("#precio").html(data.page.custom_fields.mp_sale_price);
                         $("#precio").html(Post.id);
                         $("#unidad").html(Post.comment_status);
                         Resta();
                         escribeEstado("");
                         ExisteProducto = true;
                         Producto = Post;
+console.log('falla.............'  + Post);
                      }
-
-//                    if (data.post != undefined){
-//                        $("#title").html(data.post.title);
-//                        $(target_div).append(data.post.content);
-//                        $(target_div).append("<small>" + data.post.date + "</small>");
-//                        $("#precio").html(data.post.id);
-//                        $("#unidad").html(data.post.comment_status);
-//                        Resta();
-//                        escribeEstado("");
-//                        ExisteProducto = true;
-//                        Producto = data;
-//                    } else if (data.page != undefined){
-//                        $("#title").html(data.page.title);
-//                        $(target_div).append(data.page.content);
-//                        $(target_div).append("<small>" + data.page.date + "</small>");
-//                        $("#precio").html(data.page.custom_fields.mp_sale_price);
-//                        $("#unidad").html(data.page.excerpt);
-//                        Resta();
-//                        escribeEstado("");
-//                        ExisteProducto = true;
-//                        Producto = data;
-//                    } else {
-//                        LimpiaProducto();
-//                        $("#title").html("<a style='color:#FF0000'>No se pudo leer el artículo...</a>");
-//                        ExisteProducto = false;
-//                    }
-
-
 
                 } else {
                     LimpiaProducto();
