@@ -219,26 +219,27 @@
             <div id="paymentsDetail"></div>
             <div data-role="controlgroup" data-type="horizontal" data-theme="a">
             <center>
-                <table width="55%">
+                <table width="50%">
                 <tr><td><button onclick="Resta()" data-role="button">-</button></td>
                 <td><a id="cantidad" data-role="input">1</a>&nbsp;<a id="unidad" data-role="input"></a></td>
                 <td><button onclick="Suma()" data-role="button">+</button></td>
                 <td> Precio: $<a id="precio" data-role="input"/>0</td>
                 <td> Total: $<a id="total" data-role="input"/>0</td>
                 <td><img src="img/cartmas.jpg" onclick="AgregaCarro();"/> </td>
-                <td><img src="img/back.png" onclick="$.mobile.changePage('#payments')" /> </td>
                 <td><img src="img/home2.jpg" onclick="$.mobile.changePage('#home')" /> </td>
                 </tr>
                 </table>
             </center>
                 <br />
             </div>
-<div id="main">
-<span id="categoria"></span> -> <h1><span id="title"></span></h1>
-<img id="imgs" src="" alt="" />
-<div id="contents"></div>
-<div id="Estado"></div>
-</div>
+<div id="producto">
+<span id="categoria"></span> -> <strong><span id="titulo"></span></strong>
+<center><img id="imgs" src="" alt="" /></center><br />
+<span id="descripcion"></span>
+<div id="contenido"></div>
+<div id="actualizacion"></div>
+<div id="estado"></div>
+</div><!-- fin producto -->
         </div><!-- Fin content -->
         <!-- Footer -->
         <div data-theme="f" data-role="footer" data-position="fixed">

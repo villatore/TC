@@ -9,25 +9,25 @@ function Suma() {
     $("#total")[0].innerHTML = parseInt($("#cantidad")[0].innerHTML) * parseInt($("#precio")[0].innerHTML);
 }
 function LimpiaProducto() {
-    $("#cantidad")[0].innerHTML = 0;
-    $("#precio").html(0);
+    $("#categoria").html("");
+    $("#titulo").html("");
+    document.getElementById("imgs").src = "";
+    $("#descripcion").html("");
+    $("#contenido").html("");
+    $("#actualizacion").html("");
+    $("#precio").html("0");
     $("#unidad").html("");
     Resta();
     Producto = null;
 }
 function Muestra() {
     $.mobile.changePage('#paymentsDetails');
-    var target_div = "#contents";
-    $(target_div).html("");
-    var url = $("#qrSKU")[0].value;
-    readSinglePost(url, target_div);
+    readSinglePost($("#qrSKU")[0].value);
 
-    function readSinglePost(URL, target_div) {
-        $("#title").html("");
+    function readSinglePost(URL) {
+        LimpiaProducto();
         escribeEstado("Consultando .... ");
-        $("#cantidad")[0].innerHTML = 1;
         Resta();
-console.log('a.............' + URL);
 
 //var xhr = new XMLHttpRequest();
 //xhr.onload = function(e) {
@@ -38,7 +38,6 @@ console.log('a.............' + URL);
 
         $.ajax({
             url: URL,
-            typ2e: 'GET',
             dataType: 'json',
             success: function (data) {
                 if (data.status != "error") {
@@ -49,22 +48,20 @@ console.log('a.............' + URL);
                         Post=data.page;
                     } else {
                         LimpiaProducto();
-                        $("#title").html("<a style='color:#FF0000'>No se pudo leer el artículo...</a>");
+                        $("#titulo").html("<a style='color:#FF0000'>No se pudo leer el artículo...</a>");
                         ExisteProducto = false;
                     }
 
-
                     if (Post != undefined){
-                        $("#title").html(Post.title);
-                        //$("#imgs").src=Post.thumbnail.replace(/"\"/g,"");
+                        $("#categoria").html(Post.taxonomy_product_cat[0].title);
+                        $("#titulo").html(Post.title);
                         document.getElementById("imgs").src=Post.thumbnail.replace(/"\"/g,"");
-console.log(Post.thumbnail.replace(/"\"/g,""));
-console.log("src: --" + document.getElementById("imgs").src);
-                        $(target_div).append(Post.content);
-                        $(target_div).append("<small>" + Post.date + "</small>");
+                        $("#descripcion").html(Post.excerpt);
+                        $("#contenido").append(Post.content);
+                        $("#contenido").append("<small>" + Post.date + "</small>");
+                        $("#actualizacion").html("Ultima actualizacion: " + Post.modified);
                         $("#precio").html(Post.id);
                         $("#unidad").html(Post.comment_status);
-                        $("#categoria").html(Post.taxonomy_product_cat[0].title);
                         Resta();
                         escribeEstado("");
                         ExisteProducto = true;
@@ -101,7 +98,7 @@ console.log("src: --" + document.getElementById("imgs").src);
 
                 } else {
                     LimpiaProducto();
-                    $("#title").html("<a style='color:#FF0000'>Está información no fue encontrada, consulte a su asesor...</a>");
+                    $("#titulo").html("<a style='color:#FF0000'>Esta informacion no fue encontrada, consulte a su asesor...</a>");
                     ExisteProducto = false;
                 }
                 escribeEstado("");
