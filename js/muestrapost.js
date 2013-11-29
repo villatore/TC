@@ -67,7 +67,7 @@ function Muestra() {
                         escribeEstado("");
                         ExisteProducto = true;
                         Producto = Post;
-console.log('falla.............'  + Post);
+console.log('el valor del post.............'  + Post);
                      }
 
                 } else {
