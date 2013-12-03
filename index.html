@@ -17,8 +17,6 @@
         // The scope of 'this' is the event. In order to call the 'receivedEvent'
         // function, we must explicity call 'app.receivedEvent(...);'
         onDeviceReady: function() {
-            window.location = "index2.html";
-            if (isPhoneGapReady) {
                 // as long as the connection type is not none,
                 // the device should have Internet access
                 if (navigator.network.connection.type != Connection.NONE) {
@@ -33,10 +31,10 @@
                             break;
                     }
                     alert (navigator.network.connection.type);
+                } else {
+                    alert ("Su dispositivo no cuenta con internet");
                 }
-            } else {
-                alert ("Su dispositivo no cuenta con internet");
-            }
+            window.location = "index2.html";
         },
     };
 </script>

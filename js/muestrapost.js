@@ -86,12 +86,12 @@ console.log('falla.............'  + data);
         });
     };
     function escribeEstado(Texto) {
-        $("#Estado").html(Texto);
+        $("#estado").html(Texto);
     }
 };
 
 function AgregaCarro() {
-    window.localStorage.setItem("Producto", Producto.url);
+    window.localStorage.setItem("Producto", JSON.stringify(Producto));
     return;
         var jsonUser = {  id: json.userId,
                             user: json,
@@ -110,3 +110,11 @@ function AgregaCarro() {
 };
 var ExisteProducto = false;
 var Producto;
+/***********
+http://objectmix.com/xml-soap/307425-access-denied-xmlhttp-request.html
+
+http://forums.kayako.com/threads/permission-denied-to-call-method-xmlhttprequest-open.3367/page-1
+
+http://www.webdeveloper.com/forum/showthread.php?t=147342
+
+*******/
