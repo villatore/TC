@@ -67,7 +67,7 @@ a:-webkit-any-link { text-decoration: none;cursor: auto;}
 .bubble  	{ font-size: 14px; margin-top: 10px;height: 110px;padding: 10px;background: #CDE9FF;border: #007FC1 solid 4px;-webkit-border-radius: 10px;border-radius: 10px;color: #007FC1;}
 
 /* Portrait layout (default) */
-.app {
+.appBorrar {
     background:url(../img/carro3.jpg) no-repeat center top; /* 170px x 200px */
     position:absolute;             /* position in the center of the screen */
     left:20%;

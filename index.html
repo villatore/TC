@@ -7,32 +7,54 @@
         <link rel="stylesheet" type="text/css" href="css/index.css" />
         <script src="cordova.js"></script>
 <script >
-var app = {
-    // Application Constructor
-    initialize: function () {
-        document.addEventListener('deviceready', this.onDeviceReady, false);
-    },
-    // deviceready Event Handler
-    //
-    // The scope of 'this' is the event. In order to call the 'receivedEvent'
-    // function, we must explicity call 'app.receivedEvent(...);'
-    onDeviceReady: function () {
-        window.location = "index2.html";
-    },
-};
+    var app = {
+        // Application Constructor
+        initialize: function() {
+            document.addEventListener('deviceready', this.onDeviceReady, false);
+        },
+        // deviceready Event Handler
+        //
+        // The scope of 'this' is the event. In order to call the 'receivedEvent'
+        // function, we must explicity call 'app.receivedEvent(...);'
+        onDeviceReady: function() {
+            window.location = "index2.html";
+            if (isPhoneGapReady) {
+                // as long as the connection type is not none,
+                // the device should have Internet access
+                if (navigator.network.connection.type != Connection.NONE) {
+                    // determine whether this connection is high-speed
+                    switch (navigator.network.connection.type) {
+                        case Connection.UNKNOWN:
+                        case Connection.CELL_2G:
+                            isHighSpeed = false;
+                            break;
+                        default:
+                            isHighSpeed = true;
+                            break;
+                    }
+                    alert (navigator.network.connection.type);
+                }
+            } else {
+                alert ("Su dispositivo no cuenta con internet");
+            }
+        },
+    };
 </script>
-        <title>Scanner</title>
+        <title>ToruzCart</title>
     </head>
     <body>
-        <div class="app">
-        <p>
-            <h1>Cart</h1>
-            <div id="deviceready" class="blink">
-                <p class="event listening">Connecting to Device, wait... please</p>
-                <br />
-                <a href="index2.html">Ingresar</a>
+        <center>
+            <div class="app222">
+            <p>
+                <img src="img/carro3.jpg" />
+                <h1>ToruzCart</h1>
+                <div id="deviceready" class="blink">
+                    <p class="event listening">Conectando el Dispositivo, por favor espere...</p>
+                    <br />
+                    <a href="index2.html" style="font-size: xx-small">Ingresar</a>
+                </div>
             </div>
-        </div>
+        </center>
         <script type="text/javascript">
             app.initialize();
         </script>
