@@ -7,6 +7,7 @@
         <title>ToruzCart</title>
         
         <link rel="stylesheet" type="text/css" href="css/index.css" />
+        <link rel="stylesheet" type="text/css" href="css/post.css" />
         <link rel="stylesheet" type="text/css" href="css/jquery.mobile.flatui.css" />
         
         <script src="js/jquery.js"></script>
@@ -22,6 +23,7 @@
         <!--script src="js/barcodescanner.js"></script-->
         <script src="js/index.js"></script>
         <script src="js/muestrapost.js"></script>
+        <script src="js/datospersonales.js"></script>
         <script src="js/lbl_es.js"></script>
     </head>
     <body onload="updateClock(); setInterval('updateClock()', 1000 )">
@@ -102,8 +104,8 @@
                         <br /><a href="#calendar" data-transition="slide"> Compras Anteriores</a>
                         </center></td>
                     <td><center>
-                        <a href="#calendar" data-transition="slide" class="icon-pencil" style="font-size: 50px"></a>
-                        <br /><a href="#calendar" data-transition="slide"> Ingresar datos personales</a>
+                        <a href="#Datos_Personales" data-transition="slide" class="icon-pencil" style="font-size: 50px"></a>
+                        <br /><a href="#Datos_Personales" data-transition="slide">Datos personales</a>
                         </center></td>
                 </tr>
             </table>
@@ -186,8 +188,10 @@
             <div id="typePayments"></div>
             <label><i class="icon-qrcode"> </i>código QR:</label>
             <input type="text" maxlength="170" length="50" id="qrSKU" value='http://tienda.toruzcart.com/producto/banera-porcelana/?json=get_post&dev=1'/>
-            <label><i>http://127.0.0.1:8080/w36/4?json=get_post</i></label><br>
-            <label><i>http://127.0.0.1:8080/w36/store/products/zapato-tenis-nike?json=get_post&dev=1</i></label>
+            <a style="font-size: x-small">
+            <label><i>http://tienda.toruzcart.com/producto/grifo-de-lavabo-2/?json=get_post&dev=1</i></label><br>
+            <label><i>http://tienda.toruzcart.com/producto/grifo-de-lavabo/?json=get_post&dev=1</i></label>
+            </a>
             <input type="button" value="Consultar" onclick="Muestra();"></input>
         </div>
         <img style="display:none;width:60px;height:60px;" id="myImage" src="" />
@@ -203,6 +207,7 @@
         <!-- Content -->
         <div data-role="content">
             <div id="paymentsDetail"></div>
+            <center><div id="AvisoCarroAdd" class="MsjExitos"></div></center>
             <div data-role="controlgroup" data-type="horizontal" data-theme="a">
             <center>
                 <table width="50%">
@@ -290,6 +295,34 @@
             <p>En construcción, calendario...........</p>
         </div>
     </div>
+
+    <!-- Datos Personales -->
+    <div data-role="page" id="Datos_Personales" data-add-back-btn="true">
+        <div data-theme="f" data-role="header">
+            <h1>Datos Personales</h1>
+        </div>
+        <h4>Estos datos son para facturación o entrega a domicilio</h4>
+        <div data-role="content">
+            <table width="100%">
+                <tr>
+                    <td>
+                        Persona:
+                        <select id="persona">
+                            <option value="Persona">Persona</option>
+                            <option value="nueva"><<Nueva>></option>
+                        </select>
+                    </td>
+                    <td>
+                        <input type="text" maxlength="60" size="30" id="nombrepersona" value="Persona"/>
+                    </td>
+                </tr>
+            </table>
+            <label>Nombre: </label><input type="text" maxlength="60" size="30" id="nombre"/><br />
+            <label>Tel&eacute;fono: </label><input type="text" maxlength="30" size="30" id="telefono"/><br />
+            <img src="img/cartmas.jpg" onclick="AgregaCarro();"/>
+        </div>
+    </div>
+
 <script>
     Textos();
     document.getElementById("footerT").innerHTML = "Version 0.11 Copyright (C) 2013";

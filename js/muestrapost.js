@@ -6,7 +6,7 @@ function Resta() {
 function Suma() {
     var Cantidad = parseInt($("#cantidad")[0].innerHTML);
     $("#cantidad")[0].innerHTML = Cantidad + 1;
-    $("#total")[0].innerHTML = parseInt($("#cantidad")[0].innerHTML) * parseInt($("#precio")[0].innerHTML);
+    $("#total")[0].innerHTML = addCommas(parseInt($("#cantidad")[0].innerHTML) * parseInt($("#precio")[0].innerHTML));
 }
 function LimpiaProducto() {
     $("#categoria").html("");
@@ -24,20 +24,16 @@ function Muestra() {
     $.mobile.changePage('#paymentsDetails');
     readSinglePost($("#qrSKU")[0].value);
 
-    function readSinglePost(URL) {
+    function readSinglePost(Ruta) {
         LimpiaProducto();
         escribeEstado("Consultando .... ");
         Resta();
 
-//var xhr = new XMLHttpRequest();
-//xhr.onload = function(e) {
-//    // Build a list and append it to the document's body.
-//}
-//xhr.open('GET', 'http://foo.example/data.json');
-//xhr.send(null);
-
         $.ajax({
-            url: URL,
+            crossDomain: false,
+            xhrFields: { withCredentials: false },
+            type: 'POST',
+            url: Ruta + "&jsoncallback=a12345",
             dataType: 'json',
             success: function (data) {
                 if (data.status != "error") {
@@ -61,13 +57,12 @@ function Muestra() {
                         $("#contenido").append("<small>" + Post.date + "</small>");
                         $("#actualizacion").html("Ultima actualizacion: " + Post.modified);
 //                        $("#precio").html(data.page.custom_fields.mp_sale_price);
-                        $("#precio").html(Post.id);
+                        $("#precio").html(addCommas(Post.id));
                         $("#unidad").html(Post.comment_status);
                         Resta();
                         escribeEstado("");
                         ExisteProducto = true;
                         Producto = Post;
-console.log('el valor del post.............'  + Post);
                      }
 
                 } else {
@@ -81,33 +76,56 @@ console.log('el valor del post.............'  + Post);
 console.log('falla.............'  + data);
             ExisteProducto = false;
             if (console && console.log) {
-                escribeEstado("Error al conectarse al servidor");
+                escribeEstado("<a style='color:#FF0000'>Error al conectarse al servidor</a>");
             }
         });
-    };
+
+}; // fin readSinglePost
+
     function escribeEstado(Texto) {
         $("#estado").html(Texto);
     }
 };
 
 function AgregaCarro() {
-    window.localStorage.setItem("Producto", JSON.stringify(Producto));
-    return;
-        var jsonUser = {  id: json.userId,
-                            user: json,
-                            ventas: json.ventas,
-                            comisiones: json.comisiones
-                        };
-        delete jsonUser.user['ventas'];
-        delete jsonUser.user['comisiones'];
-        window.localStorage.setItem("userFirst",JSON.stringify(jsonUser)); // para MongoDB
-        window.localStorage.setItem("uuid",device.uuid);
-        window.localStorage.setItem("ventas",JSON.stringify(jsonUser.ventas));
-        window.localStorage.setItem("comisiones",JSON.stringify(jsonUser.comisiones));
-        delete json['ventas'];
-        delete json['comisiones'];
-        window.localStorage.setItem("user",JSON.stringify(json));
+    if (!ExisteProducto) {
+        escribeEstado("<a style='color:#FF0000'>No tiene un pruducto que agregar</a>");
+        return;
+    }
+        
+    //Se busca a que tienda pertenece la mercancia para tener carritos por tienda.
+    var Partesurl = Producto.url.split("/");
+    for (var i = 0; i < Partesurl.length; i++) {
+        if (Partesurl[i].indexOf(".com") > 0)
+            break;
+    }
+    //se carga el carrito de la tienda, para poder agregarle
+    var CarritoTienda = JSON.parse(localStorage.getItem(Partesurl[i]));
+    if (CarritoTienda === null || CarritoTienda === undefined)
+        CarritoTienda = [];
+    //Se limpian campos que no se usan para simplificar el almacenamiento local
+    Producto.author = "";
+    Producto.taxonomy_product_type = "";
+    Producto.MovilGuardado = new Date();
+    Producto.MovilCantidad = $("#cantidad")[0].innerHTML;
+    CarritoTienda.push(Producto);
+
+    //Se almacena el producto dentro de la Tienda (url) para distinguir de que tienda es el producto
+    window.localStorage.setItem(Partesurl[i], JSON.stringify(CarritoTienda));
+    $("#AvisoCarroAdd")[0].innerHTML = "Su producto se agrego al carrito, gracias";
 };
+function addCommas(nStr) {
+    nStr += '';
+    x = nStr.split('.');
+    x1 = x[0];
+    x2 = x.length > 1 ? '.' + x[1] : '';
+    var rgx = /(\d+)(\d{3})/;
+    while (rgx.test(x1)) {
+        x1 = x1.replace(rgx, '$1' + ',' + '$2');
+    }
+    return x1 + x2;
+}
+
 var ExisteProducto = false;
 var Producto;
 /***********

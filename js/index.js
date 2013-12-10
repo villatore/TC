@@ -135,8 +135,6 @@
             //socket.emit('msg', details );
             socket.emit('fullUser data', details);
         });
-
-
     });
     /** 
     * Ventas
@@ -417,6 +415,17 @@
             autodividers: false
         });
         $('.detailPayments').listview('refresh');
+    });
+    $(document).on("pageinit", "#Datos_Personales", function () {
+        CargaInfo();
+        $('.Datos_Personales').listview({
+            countTheme: "b",
+            dividerTheme: "a",
+            filter: true,
+            icon: "arrow-r",
+            autodividers: true
+        });
+        $('.Datos_Personales').listview('refresh');
     });
 })(jQuery);
 

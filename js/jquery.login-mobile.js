@@ -10,7 +10,7 @@
         urlLogo: "img/qrlogo.png",
         title1: "Bienvenido",
         title2: "a",
-        title3: "Cart",
+        title3: "ToruzCart",
         userName: "Usuario",
         passName: "Contraseña",
         inputUserName: "Usuario",
