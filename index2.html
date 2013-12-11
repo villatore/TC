@@ -189,7 +189,11 @@
             <label><i class="icon-qrcode"> </i>código QR:</label>
             <input type="text" maxlength="170" length="50" id="qrSKU" value='http://tienda.toruzcart.com/producto/banera-porcelana/?json=get_post&dev=1'/>
             <a style="font-size: x-small">
+            <a onclick="$('#qrSKU')[0].value='http://tienda.toruzcart.com/producto/banera-porcelana/?json=get_post&dev=1'" >Copia</a>&nbsp;&nbsp;
+            <label><i>http://tienda.toruzcart.com/producto/banera-porcelana/?json=get_post&dev=1</i></label><br>
+            <a onclick="$('#qrSKU')[0].value='http://tienda.toruzcart.com/producto/grifo-de-lavabo-2/?json=get_post&dev=1'" >Copia</a>&nbsp;&nbsp;
             <label><i>http://tienda.toruzcart.com/producto/grifo-de-lavabo-2/?json=get_post&dev=1</i></label><br>
+            <a onclick="$('#qrSKU')[0].value='http://tienda.toruzcart.com/producto/grifo-de-lavabo/?json=get_post&dev=1'" >Copia</a>&nbsp;&nbsp;
             <label><i>http://tienda.toruzcart.com/producto/grifo-de-lavabo/?json=get_post&dev=1</i></label>
             </a>
             <input type="button" value="Consultar" onclick="Muestra();"></input>
@@ -223,14 +227,25 @@
             </center>
                 <br />
             </div>
-<div id="producto">
-<span id="categoria"></span> -> <strong><span id="titulo"></span></strong>
-<center><img id="imgs" src="" alt="" /></center><br />
-<span id="descripcion"></span>
-<div id="contenido"></div>
-<strong><div id="actualizacion"></div></strong>
-<div id="estado"></div>
-</div><!-- fin producto -->
+<center>
+<table width="90%" border=0>
+<tr><td>
+    <div id="producto">
+        <ul data-role="listview" data-divider-theme="a" data-inset="true">
+                <li data-role="list-divider" role="heading">
+                    <span id="categoria"></span> -> <strong><span id="titulo"></span></strong>
+                </li>
+        </ul>
+        <center><img id="imgs" src="" alt="" /></center><br />
+        <span id="descripcion"></span>
+        <div id="contenido"></div>
+        <strong><div id="actualizacion"></div></strong>
+        <div id="estado"></div>
+    </div><!-- fin producto -->
+</td></tr>
+</table>
+</center>
+
         </div><!-- Fin content -->
         <!-- Footer -->
         <div data-theme="f" data-role="footer" data-position="fixed">

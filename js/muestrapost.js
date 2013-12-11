@@ -17,6 +17,8 @@ function LimpiaProducto() {
     $("#actualizacion").html("");
     $("#precio").html("0");
     $("#unidad").html("");
+    $("#AvisoCarroAdd")[0].innerHTML = "";
+    $("#cantidad")[0].innerHTML = "1";
     Resta();
     Producto = null;
 }
@@ -52,11 +54,12 @@ function Muestra() {
                         $("#categoria").html(Post.taxonomy_product_cat[0].title);
                         $("#titulo").html(Post.title);
                         document.getElementById("imgs").src=Post.thumbnail.replace(/"\"/g,"");
-                        $("#descripcion").html(Post.excerpt);
+                        $("#descripcion").html("<h2>Descripción del Producto</h2>" + Post.excerpt);
                         $("#contenido").append(Post.content);
-                        $("#contenido").append("<small>" + Post.date + "</small>");
+                        $("#contenido").append("<small><br>");
                         $("#actualizacion").html("Ultima actualizacion: " + Post.modified);
-//                        $("#precio").html(data.page.custom_fields.mp_sale_price);
+                        $("#contenido").append("</small>");
+                        //                        $("#precio").html(data.page.custom_fields.mp_sale_price);
                         $("#precio").html(addCommas(Post.id));
                         $("#unidad").html(Post.comment_status);
                         Resta();
@@ -82,36 +85,53 @@ console.log('falla.............'  + data);
 
 }; // fin readSinglePost
 
-    function escribeEstado(Texto) {
-        $("#estado").html(Texto);
-    }
 };
-
+function escribeEstado(Texto) {
+    $("#estado").html(Texto);
+}
 function AgregaCarro() {
     if (!ExisteProducto) {
         escribeEstado("<a style='color:#FF0000'>No tiene un pruducto que agregar</a>");
         return;
     }
-        
-    //Se busca a que tienda pertenece la mercancia para tener carritos por tienda.
-    var Partesurl = Producto.url.split("/");
-    for (var i = 0; i < Partesurl.length; i++) {
-        if (Partesurl[i].indexOf(".com") > 0)
-            break;
-    }
-    //se carga el carrito de la tienda, para poder agregarle
-    var CarritoTienda = JSON.parse(localStorage.getItem(Partesurl[i]));
-    if (CarritoTienda === null || CarritoTienda === undefined)
-        CarritoTienda = [];
+
     //Se limpian campos que no se usan para simplificar el almacenamiento local
     Producto.author = "";
     Producto.taxonomy_product_type = "";
     Producto.MovilGuardado = new Date();
     Producto.MovilCantidad = $("#cantidad")[0].innerHTML;
-    CarritoTienda.push(Producto);
+        
+    //Se busca a que tienda pertenece la mercancia para tener carritos por tienda.
+    var Partesurl = Producto.url.split("/");
+    var nombreCarrito = "";
+    for (var i = 0; i < Partesurl.length; i++) {
+        if (Partesurl[i].indexOf(".com") > 0) {
+            nombreCarrito = Partesurl[i];
+            break;
+        }
+    }
+    //se carga el carrito de la tienda, para poder agregarle
+    var CarritoTienda = JSON.parse(localStorage.getItem(Partesurl[i]));
+    //se valida si tiene contenido
+    if (CarritoTienda === null || CarritoTienda === undefined)
+        CarritoTienda = [];
+    else {
+        var Actualizado = false;
+        for (var i = 0; i < CarritoTienda.length; i++) {
+            if (CarritoTienda[i].url == Producto.url) {
+                if (confirm("Ya tiene un producto igual en su carrito con '" + CarritoTienda[i].MovilCantidad + "' ¿desea agregar '" + Producto.MovilCantidad + "'?")) {
+                    CarritoTienda[i].MovilCantidad = parseInt(CarritoTienda[i].MovilCantidad) + parseInt(Producto.MovilCantidad);
+                    Actualizado = true;
+                }
+            }
+        }
+    }
+    //Si no se actualizó la cantidad del producto a agregar al carrito, quiere decir que el producto no existía y se agrega por primera vez
+    if (!Actualizado)
+        CarritoTienda.push(Producto);
 
     //Se almacena el producto dentro de la Tienda (url) para distinguir de que tienda es el producto
-    window.localStorage.setItem(Partesurl[i], JSON.stringify(CarritoTienda));
+    window.localStorage.setItem(nombreCarrito, JSON.stringify(CarritoTienda));
     $("#AvisoCarroAdd")[0].innerHTML = "Su producto se agrego al carrito, gracias";
 };
 function addCommas(nStr) {
