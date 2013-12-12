@@ -23,6 +23,19 @@ function LimpiaProducto() {
     Producto = null;
 }
 function Muestra() {
+    //Se agrega la validación del sitio permitido para éste cliente movil
+    var SitioValido = false;
+    for (var i = 0; i < SitioSi.length; i++) {
+        if ($("#qrSKU")[0].value.indexOf(SitioSi[i])>0 || SitioSi[i] =="*") {
+            SitioValido = true;
+            break;
+        }
+    }
+    if (!SitioValido){
+        alert("Su aplicacion movil, no es compatible con este codigo, favor de visitar: toruzcart.com para otras aplicaciones compatibles.");
+        return;
+    }
+
     $.mobile.changePage('#paymentsDetails');
     readSinglePost($("#qrSKU")[0].value);
 
@@ -50,11 +63,11 @@ function Muestra() {
                         ExisteProducto = false;
                     }
 
-                    if (Post != undefined){
+                    if (Post != undefined) {
                         $("#categoria").html(Post.taxonomy_product_cat[0].title);
                         $("#titulo").html(Post.title);
                         document.getElementById("imgs").src=Post.thumbnail.replace(/"\"/g,"");
-                        $("#descripcion").html("<h2>Descripción del Producto</h2>" + Post.excerpt);
+                        $("#descripcion").html("<h2>Descripcion del Producto</h2>" + Post.excerpt);
                         $("#contenido").append(Post.content);
                         $("#contenido").append("<small><br>");
                         $("#actualizacion").html("Ultima actualizacion: " + Post.modified);
@@ -101,7 +114,7 @@ function AgregaCarro() {
     Producto.MovilGuardado = new Date();
     Producto.MovilCantidad = $("#cantidad")[0].innerHTML;
         
-    //Se busca a que tienda pertenece la mercancia para tener carritos por tienda.
+    //Se busca a que tienda pertenece la mercancia para tener carritos por tienda, basado en el url del producto, el nombre del carro es el nombre del sitio y/o subdominio
     var Partesurl = Producto.url.split("/");
     var nombreCarrito = "";
     for (var i = 0; i < Partesurl.length; i++) {
@@ -112,6 +125,7 @@ function AgregaCarro() {
     }
     //se carga el carrito de la tienda, para poder agregarle
     var CarritoTienda = JSON.parse(localStorage.getItem(Partesurl[i]));
+    var Cancelado = false;
     //se valida si tiene contenido
     if (CarritoTienda === null || CarritoTienda === undefined)
         CarritoTienda = [];
@@ -122,7 +136,7 @@ function AgregaCarro() {
                 if (confirm("Ya tiene un producto igual en su carrito con '" + CarritoTienda[i].MovilCantidad + "' ¿desea agregar '" + Producto.MovilCantidad + "'?")) {
                     CarritoTienda[i].MovilCantidad = parseInt(CarritoTienda[i].MovilCantidad) + parseInt(Producto.MovilCantidad);
                     Actualizado = true;
-                }
+                } else Cancelado = true;
             }
         }
     }
@@ -132,7 +146,7 @@ function AgregaCarro() {
 
     //Se almacena el producto dentro de la Tienda (url) para distinguir de que tienda es el producto
     window.localStorage.setItem(nombreCarrito, JSON.stringify(CarritoTienda));
-    $("#AvisoCarroAdd")[0].innerHTML = "Su producto se agrego al carrito, gracias";
+    if (!Cancelado) $("#AvisoCarroAdd")[0].innerHTML = "Su producto se agrego al carrito, gracias";
 };
 function addCommas(nStr) {
     nStr += '';
