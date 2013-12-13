@@ -79,14 +79,14 @@
         var comisiones = JSON.parse(localStorage.getItem('comisiones'));
         var userFirstJson = JSON.parse(localStorage.getItem('userFirstJson'));
         var cantVentas = 10;
-            if (ventas != undefined)
-                cantVentas =(typeof ventas === 'string') ? 0 : ventas.length;
+        if (ventas != undefined)
+            cantVentas = (typeof ventas === 'string') ? 0 : ventas.length;
         //var cantComisiones = (typeof comisiones === 'string') ? 0 : size_object(comisiones.PENDIENTE);
         var cantComisiones = 0;
-            if (comisiones != undefined)
-                cantComisiones = (typeof comisiones === 'string') ? 0 : size_object(comisiones.PENDIENTE);
+        if (comisiones != undefined)
+            cantComisiones = (typeof comisiones === 'string') ? 0 : size_object(comisiones.PENDIENTE);
 
-        if (user != undefined){
+        if (user != undefined) {
             $('.userName').html(user.userName);
             $('.userEmail').html(user.userEmail);
             $('.userSex').html(user.userSex);
@@ -102,8 +102,8 @@
             * Este evento es recursivo, infinidad de veces
             * esto es por la conexión existente o cuando reconecta.
             */
-            var usuario ="";
-              if (user != undefined){
+            var usuario = "";
+            if (user != undefined) {
                 usuario = user.userId + ' - ' + user.userName;
                 socket.emit('detect newUser', user.userId);
             } else {
@@ -140,8 +140,11 @@
     * Ventas
     */
     $(document).on("pageinit", "#sales", function () {
+    alert("KKK");
+        CargaCarro();
+        div = $('#detailsSales');
+        return;
         var ventas = JSON.parse(localStorage.getItem('ventas')),
-            div = $('#detailsSales');
         // 2360 -> string 
         // 0567 -> object
         if ((ventas != null) && (typeof (ventas) === 'object')) {
@@ -158,7 +161,8 @@
                     'data-transition': 'slide'
                 });
                 $('<span/>', { text: '$ ' + addCommas(v.importe),
-                    class: 'ui-li-count ' + moneda}).appendTo(a);
+                    class: 'ui-li-count ' + moneda
+                }).appendTo(a);
                 $('<li/>').html(a).appendTo(ul);
                 // Calculo para acumulado monedas (Para la gráfica de pie).
                 var importe = parseInt(v.importe)
@@ -276,11 +280,11 @@
 
         navigator.notification.vibrate(400);
         console.log('inicia camara.............');
-        navigator.camera.getPicture(onPhotoSuccess, onPhotoFail, 
+        navigator.camera.getPicture(onPhotoSuccess, onPhotoFail,
 		{
-			quality: 50,
-			targetWidth: 250,
-			targetHeight: 250
+		    quality: 50,
+		    targetWidth: 250,
+		    targetHeight: 250
 		}
         );
         //var scanner = window.PhoneGap.require("cordova/plugin/BarcodeScanner");

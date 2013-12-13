@@ -25,7 +25,14 @@
         <script src="js/index.js"></script>
         <script src="js/muestrapost.js"></script>
         <script src="js/datospersonales.js"></script>
+        <script src="js/cargarcarrito.js"></script>
         <script src="js/lbl_es.js"></script>
+        <style type="text/css">
+            .style1
+            {
+                width: 90%;
+            }
+        </style>
     </head>
     <body onload="updateClock(); setInterval('updateClock()', 1000 )">
     <script>
@@ -269,29 +276,34 @@
             <h1>Carrito de compras</h1>
             <a href="#" class="ui-btn-right salesQuantity">N/A</a>
         </div>    
-<a>Carrito Actual - 15-Nov-2013</a>
         <div data-role="content">
-            <div id="listSales">
-            <ul data-role="listview">
-                <li data-icon="false">Camisa de caballero - $250.00 - 1 pz - T $250.00</a></li>
-                <li data-icon="false">Leche deslactosada - $20.00 - 5 pz - T $100.00</a></li>
-                <li data-icon="false">Zapato modelo 1234 - $350.00 - 1 pz - T $350.00</a></li>
-                <li data-icon="false">Corbata Estampado - $159.50 - 1 pz - T $159.50</a></li>
-            </ul>
+            <div id="listaCarrito">
+                <h4>.xx.</h4>
+                <table data-role="listview">
+                    <tr>
+                        <td width="5%" >
+                            <a href="#payments" data-transition="slide" class="icon-search" style="font-size: 20px"></a></td>
+                        <td>Camisa de caballero</td>
+                        <td width="10%">$250.00</td>
+                        <td width="10%">5 pz</td>
+                        <td>$1,250.00</td>
+                        <td>29/Dic/2013</td>
+                    </tr>
+                </table>
             </div>
             <div id="legendGraphic">
-                <!--LLV canvas id="graphicSales" width="290" height="290"></canvas-->
-                            Total de la compra: $859.50
+                <strong>Total de la compra: <span>$859.50</span></strong>
                 <ul>
                     <li class="color2 ui-btn-corner-all"><span class="burbuja">Seguir comprando</span></li>
                     <li class="color1 ui-btn-corner-all"><span class="burbuja">Realizar pedido</span></li>
                 </ul>
             </div>
             
-            <!--llv canvas id="graphicComparativeSales" width="290" height="290"></canvas-->
-            <div id="graphicComparativeSalesLegend"></div>
-             
         </div>
+        <!-- Footer -->
+        <div data-theme="f" data-role="footer" data-position="fixed">
+            <h3 id="footerC">Copyright (C) 2013</h3>
+        </div><!-- Fin Footer -->
     </div>
 
     <div data-role="page" id="salesDetail" data-add-back-btn="true">
@@ -341,8 +353,10 @@
 
 <script>
     Textos();
-    document.getElementById("footerT").innerHTML = "Version 0.11 Copyright (C) 2013";
-    document.getElementById("footerT2").innerHTML = "Version 0.11 Copyright (C) 2013";
+    var F = "Version 0.11 Copyright (C) 2013";
+    document.getElementById("footerT").innerHTML = F;
+    document.getElementById("footerT2").innerHTML = F;
+    document.getElementById("footerC").innerHTML = F;
 </script>
     </body>
 </html>

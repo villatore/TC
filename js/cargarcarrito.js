@@ -1,4 +1,6 @@
-function AgregaCarro() {
+function CargaCarro() {
+    alert("ddd");
+    return;
     if (!ExisteProducto) {
         escribeEstado("<a style='color:#FF0000'>No tiene un pruducto que agregar</a>");
         return;
