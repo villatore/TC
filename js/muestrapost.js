@@ -19,6 +19,7 @@ function LimpiaProducto() {
     $("#unidad").html("");
     $("#AvisoCarroAdd")[0].innerHTML = "";
     $("#cantidad")[0].innerHTML = "1";
+    $("#AvisoCarroAdd")[0].innerHTML = "";
     Resta();
     Producto = null;
 }
@@ -137,6 +138,7 @@ function AgregaCarro() {
                     CarritoTienda[i].MovilCantidad = parseInt(CarritoTienda[i].MovilCantidad) + parseInt(Producto.MovilCantidad);
                     Actualizado = true;
                 } else Cancelado = true;
+                break;
             }
         }
     }
@@ -147,6 +149,28 @@ function AgregaCarro() {
     //Se almacena el producto dentro de la Tienda (url) para distinguir de que tienda es el producto
     window.localStorage.setItem(nombreCarrito, JSON.stringify(CarritoTienda));
     if (!Cancelado) $("#AvisoCarroAdd")[0].innerHTML = "Su producto se agrego al carrito, gracias";
+
+    //guarda el nombre del carrito en cache, para poderlo consultar después
+    //se carga el carrito de la tienda, para poder agregarle
+    var Carritos = JSON.parse(localStorage.getItem("ToruzCart"));
+    //se valida si tiene contenido
+    if (Carritos === null || Carritos === undefined) {
+        Carritos = [];
+        Carritos.push('[{"Nombre":"' + nombreCarrito + '"}]');
+    } else {
+        var Existe = false;
+        for (var i = 0; i < Carritos.length; i++) {
+            if (Carritos[i].Nombre == nombreCarrito) {
+                Existe = true;
+                break;
+            }
+        }
+        //Si no exite el carrito se almacena su nombre, para furuta consulta
+        if (!Existe)
+            Carritos.push('[{"Nombre":"' + nombreCarrito + '"}]');
+
+    }
+    window.localStorage.setItem("ToruzCart", JSON.stringify(Carritos));
 };
 function addCommas(nStr) {
     nStr += '';
