@@ -1,5 +1,19 @@
 function CargaCarro() {
-    alert("ddd");
+    //se carga el carrito de la tienda, para poder agregarle, un nuevo carrito si se requiere
+    var Carritos = JSON.parse(localStorage.getItem("ToruzCart"));
+    //se valida si tiene contenido
+    if (Carritos === null || Carritos === undefined) {
+        $("#listaCarrito").append("No tiene productos en el carrito..");
+    } else {
+        for (var i = 0; i < Carritos.length; i++) {
+            $("#listaCarrito").append(JSON.parse(Carritos[i]).Nombre);
+        }
+    }
+
+
+
+
+
     return;
     if (!ExisteProducto) {
         escribeEstado("<a style='color:#FF0000'>No tiene un pruducto que agregar</a>");

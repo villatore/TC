@@ -78,7 +78,10 @@
         var ventas = JSON.parse(localStorage.getItem('ventas'));
         var comisiones = JSON.parse(localStorage.getItem('comisiones'));
         var userFirstJson = JSON.parse(localStorage.getItem('userFirstJson'));
-        var cantVentas = 10;
+        ////cantidad de productos en el carrito:
+        var cantVentas = 0;
+            if (JSON.parse(localStorage.getItem("ToruzCart")) != null && JSON.parse(localStorage.getItem("ToruzCart")) != undefined)
+                cantVentas = JSON.parse(localStorage.getItem(JSON.parse(JSON.parse(localStorage.getItem("ToruzCart"))[0]).Nombre)).length;
         if (ventas != undefined)
             cantVentas = (typeof ventas === 'string') ? 0 : ventas.length;
         //var cantComisiones = (typeof comisiones === 'string') ? 0 : size_object(comisiones.PENDIENTE);
@@ -140,11 +143,10 @@
     * Ventas
     */
     $(document).on("pageinit", "#sales", function () {
-    alert("KKK");
         CargaCarro();
         div = $('#detailsSales');
         return;
-        var ventas = JSON.parse(localStorage.getItem('ventas')),
+        var ventas = JSON.parse(localStorage.getItem('ventas'));
         // 2360 -> string 
         // 0567 -> object
         if ((ventas != null) && (typeof (ventas) === 'object')) {
