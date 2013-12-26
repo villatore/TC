@@ -81,7 +81,8 @@
         ////cantidad de productos en el carrito:
         var cantVentas = 0;
             if (JSON.parse(localStorage.getItem("ToruzCart")) != null && JSON.parse(localStorage.getItem("ToruzCart")) != undefined)
-                cantVentas = JSON.parse(localStorage.getItem(JSON.parse(JSON.parse(localStorage.getItem("ToruzCart"))[0]).Nombre)).length;
+                if (localStorage.getItem(JSON.parse(JSON.parse(localStorage.getItem("ToruzCart"))[0]).Nombre)!= null && localStorage.getItem(JSON.parse(JSON.parse(localStorage.getItem("ToruzCart"))[0]).Nombre) != undefined)
+                    cantVentas = JSON.parse(localStorage.getItem(JSON.parse(JSON.parse(localStorage.getItem("ToruzCart"))[0]).Nombre)).length;
         if (ventas != undefined)
             cantVentas = (typeof ventas === 'string') ? 0 : ventas.length;
         //var cantComisiones = (typeof comisiones === 'string') ? 0 : size_object(comisiones.PENDIENTE);

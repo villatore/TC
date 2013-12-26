@@ -19,7 +19,6 @@ function LimpiaProducto() {
     $("#unidad").html("");
     $("#AvisoCarroAdd")[0].innerHTML = "";
     $("#cantidad")[0].innerHTML = "1";
-    $("#AvisoCarroAdd")[0].innerHTML = "";
     Resta();
     Producto = null;
 }
