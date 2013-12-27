@@ -487,3 +487,4 @@ function onErrorGeo(error) {
     // Handle any errors we may face
     document.getElementById('geolocationData').innerHTML = errString;
 }//fin
+var RedDisponible = true;
