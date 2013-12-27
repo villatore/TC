@@ -119,7 +119,7 @@ function AgregaCarro() {
     var nombreCarrito = "";
     for (var i = 0; i < Partesurl.length; i++) {
         if (Partesurl[i].indexOf(".com") > 0) {
-            nombreCarrito = Partesurl[i];
+            nombreCarrito = ""+Partesurl[i];
             break;
         }
     }
