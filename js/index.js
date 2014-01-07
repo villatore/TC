@@ -1,5 +1,5 @@
 ﻿(function ($) {
-
+var z=0;
     function bindEvents() {
         document.addEventListener('pause', onPause, false);
         document.addEventListener('resume', onResume, false);
