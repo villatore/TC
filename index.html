@@ -9,7 +9,8 @@
     var app = {
         // Application Constructor
         initialize: function() {
-            document.addEventListener('deviceready', this.onDeviceReady, false);
+            document.addEventListener('deviceready', this.onDeviceReady, true);
+this.onDeviceReady();
         },
         // deviceready Event Handler
         //
@@ -18,7 +19,8 @@
         onDeviceReady: function() {
                 // as long as the connection type is not none,
                 // the device should have Internet access
-                if (navigator.network.connection.type != Connection.NONE) {
+                //if (navigator.network.connection.type != Connection.NONE) {
+                if (navigator.network !== undefined) {
                     // determine whether this connection is high-speed
                     switch (navigator.network.connection.type) {
                         case Connection.UNKNOWN:
