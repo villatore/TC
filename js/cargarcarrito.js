@@ -3,7 +3,7 @@ function CargaCarro() {
     var Carritos = JSON.parse(localStorage.getItem("ToruzCart"));
     //se valida si tiene contenido
     if (Carritos === null || Carritos === undefined || Carritos.length<=0) {
-        $("#listaCarrito").append("No tiene productos en el carrito..");
+        $("#listaCarrito").html("No tiene productos en el carrito..");
     } else {
         //se enlista todas las tiendas que se tengan almacenadas, por default solo sería una
         $("#listaCarrito").html("");
