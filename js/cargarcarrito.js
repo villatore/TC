@@ -23,7 +23,7 @@ function CargaCarro() {
                     for (var ii = 0; ii < ProdsCarrito.length; ii++) {
                         var P = ProdsCarrito[ii];
                         contenidoP = contenidoP + "<tr><td width='5%' onclick=MuestraP('" + P.url + "'," + P.MovilCantidad + ");>";
-                        contenidoP = contenidoP + "<a onclick=MuestraP('" + P.url + "'," + P.MovilCantidad + "); data-transition='slide' class='icon-search' style='font-size: 20px'></a></td>";
+                        contenidoP = contenidoP + "<a onclick=MuestraP('" + P.url + "'," + P.MovilCantidad + ",'" + t + "',"+ii+"); data-transition='slide' class='icon-search' style='font-size: 20px'></a></td>";
                         contenidoP = contenidoP + "<td width='10%'>" + P.title.trim() + "</td>"; //nombre P
                         contenidoP = contenidoP + "<td width='10%'>$" + addCommas(P.id) + "</td>"; //Precio P
                         contenidoP = contenidoP + "<td width='10%'>" + P.MovilCantidad + " " + P.comment_status + "</td>"; //unidades y medida
@@ -45,12 +45,38 @@ function CargaCarro() {
     } //end if
 
 }
-function MuestraP(Producto, ProductoC) {
-    $("#qrSKU")[0].value = Producto + "?json=get_post&dev=1";
-    $("#cantidad")[0].innerHTML = ProductoC;
-    Muestra();
-    $("#cantidad")[0].innerHTML = ProductoC;
+function MuestraP(ProductoURL, ProductoC,tienda, iProducto) {
+	//si hay red, se consulta el producto en línea
+	if (navigator.network.connection.type != Connection.NONE && navigator.network.connection.type != Connection.UNKNOWN) {
+		$("#qrSKU")[0].value = ProductoURL + "?json=get_post&dev=1";
+		$("#cantidad")[0].innerHTML = ProductoC;
+		Muestra();
+		$("#cantidad")[0].innerHTML = ProductoC;
+		Suma();
+	} else{
+		MuestraPLocal(tienda, iProducto);
+	}
+}
+function MuestraPLocal(tienda, Producto) {
+	var Post = JSON.parse(localStorage.getItem(tienda))[Producto];
+	LimpiaProducto();
+
+	$("#cantidad")[0].innerHTML = Post.MovilCantidad;
+	$("#categoria").html(Post.taxonomy_product_cat[0].title);
+	$("#titulo").html(Post.title);
+	document.getElementById("imgs").src=Post.thumbnail.replace(/"\"/g,"");
+	$("#descripcion").html("<h2>Descripcion del Producto</h2>" + Post.excerpt);
+	$("#contenido").append(Post.content);
+	$("#contenido").append("<small><br>");
+	$("#actualizacion").html("Ultima actualizacion: " + Post.modified);
+	$("#contenido").append("</small>");
+	//                        $("#precio").html(data.page.custom_fields.mp_sale_price);
+	$("#precio").html(addCommas(Post.id));
+	$("#unidad").html(Post.comment_status);
+
     Suma();
+    $.mobile.changePage('#paymentsDetails');
+	$("#AvisoCarroAdd")[0].innerHTML = "Informacion local del producto";
 }
 function BorrarP(Tienda, Producto, prods) {
     //se reutiliza esta rutina para borrar todos los productos, solo Producto=0 y todos los productos a borrar prods
