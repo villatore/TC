@@ -6,11 +6,18 @@
         <link rel="stylesheet" type="text/css" href="css/index.css" />
         <script src="js/cordova.js"></script>
 <script >
+    document.addEventListener("deviceready", deviceIsReady, false);
+
+    function deviceIsReady() {
+        /*This is where all of you initialization code should go. 
+          With PhoneGap the deviceready should be the first thing*/
+		  console.log("si entraaaaaaaaaaaa ____________________");
+    }
     var app = {
         // Application Constructor
         initialize: function() {
 			console.log("se inicializa");
-            document.addEventListener('deviceready', this.onDeviceReady, true);
+            document.addEventListener('deviceready', this.onDeviceReady, false);
 			console.log("se inicializó");
 //this.onDeviceReady();
         },
