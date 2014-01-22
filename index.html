@@ -1,39 +1,15 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta charset="UTF-8">
-		<meta name="format-detection" content="telephone=no" />
-        <!--meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height,target-densitydpi=device-dpi " -->
+        <meta name="format-detection" content="telephone=no" />
+        <!--meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height,target-densitydpi=device-dpi " /-->
         <link rel="stylesheet" type="text/css" href="css/index.css" />
-        <script type="text/javascript" charset="utf-8" src="js/cordova.js"></script>
-<script type="text/javascript" charset="utf-8">
-    document.addEventListener("deviceready", deviceIsReady, false);
-
-    function deviceIsReady() {
-        /*This is where all of you initialization code should go. 
-          With PhoneGap the deviceready should be the first thing*/
-		  console.log("si entraaaaaaaaaaaa ____________________");
-    }
-document.addEventListener("pause", onPause, false);
-
-function onPause() {
-    // Handle the pause event
-		  console.log("se pausaaaaaa ____________________");
- }
- 
- console.log( 'Device Name: '     + device.name     + '<br />' +
-                            'Device Cordova: '  + device.cordova  + '<br />' +
-                            'Device Platform: ' + device.platform + '<br />' +
-                            'Device UUID: '     + device.uuid     + '<br />' +
-                            'Device Model: '    + device.model    + '<br />' +
-                            'Device Version: '  + device.version  + '<br />');
+        <script src="js/cordova.js"></script>
+<script >
     var app = {
         // Application Constructor
         initialize: function() {
-			console.log("se inicializa");
             document.addEventListener('deviceready', this.onDeviceReady, false);
-			console.log("se inicializó");
-//this.onDeviceReady();
         },
         // deviceready Event Handler
         //
@@ -42,8 +18,7 @@ function onPause() {
         onDeviceReady: function() {
                 // as long as the connection type is not none,
                 // the device should have Internet access
-                //if (navigator.network.connection.type != Connection.NONE) {
-                if (navigator.network !== undefined) {
+                if (navigator.network.connection.type != Connection.NONE) {
                     // determine whether this connection is high-speed
                     switch (navigator.network.connection.type) {
                         case Connection.UNKNOWN:
@@ -54,13 +29,11 @@ function onPause() {
                             isHighSpeed = true;
                             break;
                     }
-                    console.log("Su conexión es del tipo: "+navigator.network.connection.type);
+                    console.log(navigator.network.connection.type);
                 } else {
                     alert ("Su dispositivo no cuenta con internet");
                 }
-			console.log("Se cambiará a la siguiente pag");
             window.location = "index2.html";
-			console.log("Se cambia a la siguiente pag");
         }
     };
 </script>
@@ -75,7 +48,7 @@ function onPause() {
                 <div class="blink">
                     <p class="event listening">Conectando el Dispositivo, por favor espere...</p>
                     <br />
-                    <a href="index2.html" style="font-size: xx-small">Ingresar 1.1</a>
+                    <a href="index2.html" style="font-size: xx-small">Ingresar</a>
                 </div>
                 </center>
             </div>
