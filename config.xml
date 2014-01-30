@@ -1,0 +1,12 @@
+<?xml version='1.0' encoding='utf-8'?>
+<widget id="com.phonegap.tc__t" version="0.1.2" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0">
+    <name>AFM_TC2.0</name>
+    <description>
+        Primer version de TCart ....... retomando el código
+    </description>
+    <author email="villatore@yahoo.com.mx" href="http://toruzcart.com/">
+        toruzcart Team
+    </author>
+	<content src="index.html"/>
+    <access origin="http://127.0.0.1*" />
+</widget>
