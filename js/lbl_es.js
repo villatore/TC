@@ -1,6 +1,6 @@
 var l8n = {
     "en-US": {
-        "#version": "Version 0.0.1en",
+        "#version": "Version 0.0.1en-Ene 31 2014",
         "#ajustes": "Settings",
         "#per": "Rol",
         "#sal" : "Exit"
@@ -8,7 +8,7 @@ var l8n = {
     "es": { //español
     },
     "es-419": { //español - latinoamerica
-        "#version": "Version 0.0.1es",
+        "#version": "Version 0.0.1es-Ene 31 2014",
         "#ajustes": "Ajustes",
         "#per": "Perfil",
         "#sal" : "Salida"
