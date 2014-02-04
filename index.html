@@ -476,10 +476,10 @@ if (validateField('field_13','fieldBox_13','state',1) == false)
     </div>
 
 <script>
-    $("wifi")[0].hidden = RedDisponible;
+    $("#wifi")[0].hidden = !RedDisponible;
     //alert(RedDisponible);
     Textos();
-    var F = "Version 0.11 Copyright (C) 2013";
+    var F = "Version 0.1 Copyright (C) Feb 4, 2014";
     document.getElementById("footerT").innerHTML = F;
     document.getElementById("footerT2").innerHTML = F;
     document.getElementById("footerC").innerHTML = F;
