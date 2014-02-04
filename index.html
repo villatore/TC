@@ -37,6 +37,7 @@
     </head>
     <body onload="updateClock(); setInterval('updateClock()', 1000 )">
     <script>
+        RedDisponible = false;
         $(function () {
             app.initialize();
             FastClick.attach(document.body);
@@ -66,14 +67,9 @@
         onDeviceReady: function() {
             // as long as the connection type is not none,
             // the device should have Internet access
-            console.log("a");
-            console.log(navigator);
-            console.log("b");
-            console.log(navigator.network);
-            console.log("c");
-            console.log(navigator.network.connection);
-            console.log("dddd");
             if (navigator.network.connection.type != Connection.NONE) {
+                RedDisponible = true;
+
                 // determine whether this connection is high-speed
                 switch (navigator.network.connection.type) {
                     case Connection.UNKNOWN:
@@ -86,9 +82,10 @@
                 }
                 console.log(navigator.network.connection.type);
             } else {
-                alert("Su dispositivo no cuenta con internet");
+                RedDisponible = false;
+                //alert("Su dispositivo no cuenta con internet");
             }
-            window.location = "index2.html";
+            //window.location = "index2.html";
         }
     };
 </script>
@@ -479,12 +476,8 @@ if (validateField('field_13','fieldBox_13','state',1) == false)
     </div>
 
 <script>
-    /*document.addEventListener('deviceready', this.onDeviceReady, false);
-
-    if (navigator.network.connection.type == Connection.NONE) RedDisponible = false;
-    else RedDisponible = true;
     $("wifi")[0].hidden = RedDisponible;
-    alert(RedDisponible);*/
+    //alert(RedDisponible);
     Textos();
     var F = "Version 0.11 Copyright (C) 2013";
     document.getElementById("footerT").innerHTML = F;
