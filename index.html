@@ -66,6 +66,13 @@
         onDeviceReady: function() {
             // as long as the connection type is not none,
             // the device should have Internet access
+            console.log("a");
+            console.log(navigator);
+            console.log("b");
+            console.log(navigator.network);
+            console.log("c");
+            console.log(navigator.network.connection);
+            console.log("dddd");
             if (navigator.network.connection.type != Connection.NONE) {
                 // determine whether this connection is high-speed
                 switch (navigator.network.connection.type) {
