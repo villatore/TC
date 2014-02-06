@@ -30,10 +30,15 @@
         <script src="js/datospersonales.js"></script>
         <script src="js/cargarcarrito.js"></script>
         <script src="js/lbl_es.js"></script>
+        <script type="text/javascript" src="js/datospersonalesForm.js"></script>
+        
 		      <script type="text/javascript" src="js/calendar/calendar.js"></script>
 		      <script type="text/javascript" src="js/calendar/calendar-en.js"></script>
 		      <script type="text/javascript" src="js/calendar/calendar-setup.js"></script>
-			  <script type="text/javascript" src="js/datospersonalesForm.js"></script>
+              <script type="application/javascript" charset="utf-8" src="js/framework/utility.js"></script>
+              <script type="application/javascript" charset="utf-8" src="js/framework/ui-core.js"></script>
+              <script type="application/javascript" charset="utf-8" src="js/framework/device.js"></script>
+              <script type="application/javascript" charset="utf-8" src="js/framework/localization.js"></script>
     </head>
     <body onload="updateClock(); setInterval('updateClock()', 1000 )">
     <script>
@@ -55,6 +60,8 @@
         });
     </script>
 <script >
+   initLocalization();
+
     var app = {
         // Application Constructor
         initialize: function() {
@@ -85,9 +92,61 @@
                 RedDisponible = false;
                 //alert("Su dispositivo no cuenta con internet");
             }
-            //window.location = "index2.html";
         }
     };
+
+    function initLocalization() {
+
+        // initialize the globalization libraries
+        PKLOC.initializeGlobalization(function() {
+            PKLOC.loadLocales(["en-US", "en-AU", "en-GB", "es-ES", "es-MX", "es-US", "es"],
+								                       function() {
+								                           init();
+								                       });
+        }
+							   );
+    }
+    init = function() {
+        // for wp7; alert doesn't work: see https://groups.google.com/forum/?fromgroups#!topic/phonegap/4wU-kKr0iQs
+        if (device.platform == "WinCE") {
+            window.alert = navigator.notification.alert;
+        }
+        // fake our locale:
+        PKLOC.currentUserLocale = "es-ES";
+
+        // set up our translation matrix
+
+        // english
+        PKLOC.addTranslation("en", "APP_TITLE", "Quiz Time");
+        PKLOC.addTranslation("en", "APP_TITLE_IMAGE", "AppTitle-enus.png");
+        PKLOC.addTranslation("en", "CORRECT", "Correct!");
+        PKLOC.addTranslation("en", "INCORRECT", "Incorrect.");
+        PKLOC.addTranslation("en", "START", "Start");
+        PKLOC.addTranslation("en", "BACK", "Back");
+        PKLOC.addTranslation("en", "SKIP", "Skip");
+        PKLOC.addTranslation("en", "QUESTION_%1", "Question %1");
+        PKLOC.addTranslation("en", "SCORE_%1", "Score: %1");
+        PKLOC.addTranslation("en", "RESULTS", "Results");
+        PKLOC.addTranslation("en", "TRY_AGAIN?", "Try Again?");
+
+        // spanish
+        PKLOC.addTranslation("es", "APP_TITLE", "Examen Tiempo");
+        PKLOC.addTranslation("es", "APP_TITLE_IMAGE", "AppTitle-eses.png");
+        PKLOC.addTranslation("es", "CORRECT", "¡Correcto!");
+        PKLOC.addTranslation("es", "INCORRECT", "Incorrecto.");
+        PKLOC.addTranslation("es", "START", "Comenzar");
+        PKLOC.addTranslation("es", "BACK", "Volver");
+        PKLOC.addTranslation("es", "SKIP", "Omitir");
+        PKLOC.addTranslation("es", "QUESTION_%1", "Pregunta %1");
+        PKLOC.addTranslation("es", "SCORE_%1", "Puntuación: %1");
+        PKLOC.addTranslation("es", "RESULTS", "Resultados");
+        PKLOC.addTranslation("es", "TRY_AGAIN?", "¿Intentar du nuevo?");
+
+
+        // initialize our application
+        PKUI.CORE.initializeApplication();
+    }
+
 </script>
 
     <div data-role="page" id="i2ndex">
@@ -356,15 +415,22 @@
         <div data-theme="f" data-role="header">
             <h1>Datos Personales</h1>
         </div>
-        <h4>Estos datos son para facturación o entrega a domicilio</h4>
-        <div data-role="content">
+        <h4>Sus datos son para facturación o entrega a domicilio</h4>
+        <!--div data-role="content"-->
 <!------>
-		<BR/><!-- begin form -->
-		<form method=post enctype=multipart/form-data action=processor.php onSubmit="return validatePage1();"><ul class=mainForm id="mainForm_1">
-
+		<!-- begin form -->
+		<form method=post enctype=multipart/form-data action=processor.php onSubmit="return validatePage1();">
+		    <ul class=mainForm id="mainForm_1">
 				<li class="mainForm" id="fieldBox_1">
-					<label class="formFieldQuestion">Field question 1&nbsp;*&nbsp;<a class=info href=#><img src=img/tip_small.png border=0><span class=infobox>prueba de tooltip</span></a></label><input class=mainForm type=text name=field_1 id=field_1 size='20' value=''></li>
-
+					<label class="formFieldQuestion">Nombre&nbsp;*
+					<a class=info href=#><img src=img/tip_small.png border=0>
+					<span class=infobox id="tpfieldBox_1">
+					    <script>
+					        $ge("tpfieldBox_1").innerHTML = __T("RESULTS"); 
+					    </script>
+					</span></a></label>
+					<input class=mainForm type=text name=field_1 id=field_1 size='20' value=''>
+				</li>
 				<li class="mainForm" id="fieldBox_2">
 					<label class="formFieldQuestion">Field question 2&nbsp;*</label><textarea class=mainForm  name=field_2 id=field_2 rows=20 cols=20></textarea></li>
 
@@ -456,23 +522,18 @@ if (validateField('field_13','fieldBox_13','state',1) == false)
 
 		<!-- end page validaton -->
 
-
-
 		<!-- next page buttons --><li class="mainForm">
 								
 
 			</li><li class="mainForm">
 					<input id="saveForm" class="mainForm" type="submit" value="Submit" />
 				</li>
-
-			</form>
-			<!-- end of form -->
-		<!-- close the display stuff for this page -->
 		</ul>
+		</form>
+		<!-- end of form -->
 <!------>
-		
 		<img src="img/cartmas.jpg" onclick="AgregaCarro();"/>
-        </div>
+        <!--/div-->
     </div>
 
 <script>

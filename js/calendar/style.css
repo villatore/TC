@@ -196,11 +196,11 @@ a.info:hover .infobox
 	width: 205px;
 	height: 70px;
 	border: 1px solid #ccc;
-	background: #f4f4f4 url(question.gif) no-repeat bottom right;
+	background: #FFFF00 url(question.gif) no-repeat right bottom;
 	color: #000;
 	text-align: left;
 	font-size: 0.7em;
-	padding-left: 10px;
+	padding-left: 5px;
 	padding-top: 10px;
 	z-index: 1;
 }
