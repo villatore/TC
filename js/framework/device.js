@@ -50,7 +50,9 @@ PKDEVICE.platform = function()
   {
     return PKDEVICE.platformOverride.toLowerCase();
   }
-  var thePlatform = device.platform.toLowerCase();
+  var thePlatform = "";
+  if (device.platform != null) thePlatform = device.platform.toLowerCase();
+  
   if (thePlatform.indexOf("ipad") > -1 || thePlatform.indexOf("iphone") > -1)
   {
     thePlatform = "ios";
