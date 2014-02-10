@@ -3,7 +3,8 @@ var l8n = {
         "#version": "Version 0.0.1en-Ene 31 2014",
         "#ajustes": "Settings",
         "#per": "Rol",
-        "#sal" : "Exit"
+        "#sal" : "Exit",
+        "#ttipnombre": "Tooltip test..."
     },
     "es": { //español
     },
@@ -11,7 +12,8 @@ var l8n = {
         "#version": "Version 0.0.1es-Ene 31 2014",
         "#ajustes": "Ajustes",
         "#per": "Perfil",
-        "#sal" : "Salida"
+        "#sal" : "Salida",
+        "#ttipnombre": "Prueba del Tooltip..."
     },
     "ko": {
         ".email": "",
@@ -25,6 +27,7 @@ function Textos() {
     Etiqueta("#ajustes");
     Etiqueta("#per");
     Etiqueta("#sal");
+    Etiqueta("#ttipnombre");
 }
 function Etiqueta(key) {
     var lenguaje = "en-US"; //idioma por default
@@ -37,8 +40,17 @@ function Etiqueta(key) {
     var key = l8n[lenguaje][i];
     document.querySelector(key).textContent = l8n[lenguaje][key];
     }*/
-    
+
     if (window.navigator && l8n[lenguaje]) {
         document.querySelector(key).textContent = l8n[lenguaje][key];
     }
+}
+/**
+ *
+ * Returns an element specified by elementId. Similar to (but not exactly like) jQuery's $()
+ *
+ */
+function $ge(elementId)
+{
+  return document.getElementById(elementId);
 }

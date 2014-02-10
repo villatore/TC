@@ -19,17 +19,20 @@ b2ody
 	background-color: #ffffff;
 }
 
-ul.mainFor2m
+ul.mainForm
 {
 	list-style-type: none;
 	font-family: Tahoma, Arial, Verdana, sans-serif;
 	font-size:15px;	
+	margin-left: -19px;
 }
 
 li.mainForm
 {
 	padding-bottom: 10px;
 	list-style-type: none;
+	margin: 0 0 0 -30;
+	text-align: left;
 }
 
 
@@ -40,7 +43,7 @@ li.mainForm
 	border-style: solid;
 	margin: 0 auto;
 	text-align: left;
-	width: 70%;
+	w2idth: 70%;
 }
 
 
@@ -135,7 +138,7 @@ p.formInfo
 
 }
 
-label.formFieldQuestion
+.formFieldQuestion
 {
 	line-height: 125%;
 	padding: 0 4px 1px 0;
@@ -144,19 +147,22 @@ label.formFieldQuestion
 	font-size: 95%;
 	font-weight: bold;
 	list-style-type: none;
+	color: #FF0000;
+	font-weight: bold;
+	
+	position: relative;
+	margin: 0 auto;
+	text-align: left;
 }
 
-label.formFieldOption
+.formFieldOption
 {
 	font-size:90%;
 	display:block;
 	line-height:1.0em;
-	margin:-19px 0 0 25px;
 	padding:4px 0 5px 0;
 	width:90%;
 }
-
-
 
 input.formFieldStyle
 {
@@ -212,7 +218,7 @@ button.calendarStyle
 	border: 0;
 	height:22px;
 	width:22px;
-	background-image:url(imgs/calendar.png);
+	background-image:url(../../img/calendar.png);
 	cursor: pointer;
 	cursor: hand;
 }

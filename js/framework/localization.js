@@ -49,7 +49,7 @@ PKLOC.localizedText =
  */
 PKLOC.initializeGlobalization = function(completion)
 {
-  PKUTIL.include(["./globalize.js"], completion);
+  PKUTIL.include(["./js/framework/globalize.js"], completion);
 }
 /**
  *
@@ -60,7 +60,7 @@ PKLOC.loadLocales = function(theLocales, completion)
 {
   for (var i = 0; i < theLocales.length; i++)
   {
-    theLocales[i] = "./cultures/globalize.culture." + theLocales[i] + ".js";
+    theLocales[i] = "./js/framework/cultures/globalize.culture." + theLocales[i] + ".js";
   }
   PKUTIL.include(theLocales, completion);
 }

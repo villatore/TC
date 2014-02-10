@@ -1,7 +1,16 @@
+function MuestraEntrega(){
+    if (!$ge('mismodomv').checked)
+        expandElem('domicilioEntregav')
+    else
+        collapseElem('domicilioEntregav')
+}
+
 		function collapseElem(obj)
 		{
 			var el = document.getElementById(obj);
 			el.style.display = 'none';
+			el.style.visibility = 'hidden';
+			
 		}
 
 
@@ -9,6 +18,7 @@
 		{
 			var el = document.getElementById(obj);
 			el.style.display = '';
+			el.style.visibility = '';
 		}
 
 			// collapse all elements, except the first one
@@ -23,24 +33,20 @@
 				}
 			}
 
-			function validateField(fieldId, fieldBoxId, fieldType, required)
+			function validateField(fieldId, fieldType, required)
 			{
-				fieldBox = document.getElementById(fieldBoxId);
 				fieldObj = document.getElementById(fieldId);
 
 				if(fieldType == 'text'  ||  fieldType == 'textarea'  ||  fieldType == 'password'  ||  fieldType == 'file'  ||  fieldType == 'phone'  || fieldType == 'website')
 				{	
 					if(required == 1 && fieldObj.value == '')
 					{
-						fieldObj.setAttribute("class","mainFormError");
+					    fieldObj.setAttribute("class", "mainFormError");
 						fieldObj.setAttribute("className","mainFormError");
 						fieldObj.focus();
 						return false;					
 					}
-
 				}
-
-
 				else if(fieldType == 'menu'  || fieldType == 'country'  || fieldType == 'state')
 				{	
 					if(required == 1 && fieldObj.selectedIndex == 0)
@@ -52,8 +58,6 @@
 					}
 
 				}
-
-
 				else if(fieldType == 'email')
 				{	
 					if((required == 1 && fieldObj.value=='')  ||  (fieldObj.value!=''  && !validate_email(fieldObj.value)))
@@ -63,11 +67,7 @@
 						fieldObj.focus();
 						return false;					
 					}
-
 				}
-
-
-
 			}
 
 			function validate_email(emailStr)
@@ -137,35 +137,33 @@
 				}
 			}
 
-			function validatePage1()
+			function validaPagina()
 			{
 				retVal = true;
-				if (validateField('field_1','fieldBox_1','text',1) == false)
- retVal=false;
-if (validateField('field_2','fieldBox_2','textarea',1) == false)
- retVal=false;
-if (validateField('field_3','fieldBox_3','menu',1) == false)
- retVal=false;
-if (validateField('field_4','fieldBox_4','checkbox',1) == false)
- retVal=false;
-if (validateField('field_5','fieldBox_5','radio',1) == false)
- retVal=false;
-if (validateDate('field_6','fieldBox_6','date',1,'','') == false)
- retVal=false;
-if (validateField('field_7','fieldBox_7','password',1) == false)
- retVal=false;
-if (validateField('field_8','fieldBox_8','file',1) == false)
- retVal=false;
-if (validateField('field_9','fieldBox_9','email',1) == false)
- retVal=false;
-if (validateField('field_10','fieldBox_10','phone',1) == false)
- retVal=false;
-if (validateField('field_11','fieldBox_11','website',1) == false)
- retVal=false;
-if (validateField('field_12','fieldBox_12','country',1) == false)
- retVal=false;
-if (validateField('field_13','fieldBox_13','state',1) == false)
- retVal=false;
+				if (!validateField('nombrev', 'text', 1)) retVal=false;
+                if (!validateField('domiciliov', 'textarea', 1)) retVal=false;
+                if (validateField('field_3','fieldBox_3','menu',1) == false)
+                 retVal=false;
+                if (validateField('field_4','fieldBox_4','checkbox',1) == false)
+                 retVal=false;
+                if (validateField('field_5','fieldBox_5','radio',1) == false)
+                 retVal=false;
+                if (validateDate('field_6','fieldBox_6','date',1,'','') == false)
+                 retVal=false;
+                if (validateField('field_7','fieldBox_7','password',1) == false)
+                 retVal=false;
+                if (validateField('field_8','fieldBox_8','file',1) == false)
+                 retVal=false;
+                if (validateField('field_9','fieldBox_9','email',1) == false)
+                 retVal=false;
+                if (validateField('field_10','fieldBox_10','phone',1) == false)
+                 retVal=false;
+                if (validateField('field_11','fieldBox_11','website',1) == false)
+                 retVal=false;
+                if (validateField('field_12','fieldBox_12','country',1) == false)
+                 retVal=false;
+                if (validateField('field_13','fieldBox_13','state',1) == false)
+                 retVal=false;
 
 				if(retVal == false)
 				{
