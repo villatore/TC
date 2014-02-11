@@ -82,7 +82,7 @@
                         isHighSpeed = true;
                         break;
                 }
-                console.log(navigator.network.connection.type);
+                console.log(">>>>>>>>" + navigator.network.connection.type);
             } else {
                 RedDisponible = false;
                 //alert("Su dispositivo no cuenta con internet");
@@ -358,11 +358,11 @@
         <div data-theme="f" data-role="header">
             <h1>Datos Personales</h1>
         </div>
-        <h4>Sus datos son para facturación o entrega a domicilio</h4>
+        <h4><a id=AyudaDatosPersonales></a></h4>
         <!--div data-role="content"-->
 <!------>
 		<!-- begin form -->
-		<form method=post enctype=multipart/form-data action=processor.php onSubmit="validaPagina();">
+		<form method=post enctype=multipart/form-data">
 		    <ul class=mainForm id="mainForm_1">
 				<li class="mainForm">
 					<label class="formFieldQuestion" name=nombre id=nombre>Nombre</label>
@@ -373,14 +373,26 @@
 					<label class="formFieldQuestion" nombre=domicilio id=domicilio>Domicilio</label>
 					<textarea class=mainForm  name=domiciliov id=domiciliov rows=10 cols=80></textarea></li>
 
-				<!--li class="mainForm" id="fieldBox_3">
-					<label class="formFieldQuestion">Field question 3&nbsp;*</label><select class=mainForm name=field_3 id=field_3><option value=''></option><option value="zapatos">zapatos</option><option value="carros">carros</option></select></li-->
-
-				<li class="mainForm" name=mismodom id=mismodom>
+				<li class="mainForm">
 					<label class="formFieldQuestion" name=mismodom id=mismodom>Mismo domicilio para entrega</label><br>
-					<input class=mainForm type=checkbox name=mismodomv[] id=mismodomv value="1" checked onchange="MuestraEntrega()" />
+					<input class=mainForm type=checkbox name=mismodomv id=mismodomv value="1" checked onchange="MuestraEntrega()" />
                         <textarea class=mainForm  name=domicilioEntregav id=domicilioEntregav rows=10 cols=80 style="visibility: hidden"></textarea>
 					</li>
+
+				<li class="mainForm">
+					<label class="formFieldOption" name=mail id=mail>Correo electrónico</label>
+					<input class=mainForm type=email name=mailv id=mailv size=50 value="" style="background-image:url(img/email.png); background-repeat: no-repeat;  padding: 2px 2px 2px 25px;"></li>
+
+				<li class="mainForm">
+					<label class="formFieldQuestion" name=tel id=tel>Teléfono</label>
+					<input class=mainForm type=phone name=telv id=telv size=50 value="" style="background-image:url(img/phone.png); background-repeat: no-repeat;  padding: 2px 2px 2px 25px;"></li>
+
+				<li class="mainForm">
+					<label class="formFieldOption" name=cel id=cel>Cel</label>
+					<input class=mainForm type=phone name=celv id=celv size=50 value="" style="background-image:url(img/phone.png); background-repeat: no-repeat;  padding: 2px 2px 2px 25px;"></li>
+
+				<!--li class="mainForm" id="fieldBox_3">
+					<label class="formFieldQuestion">Field question 3&nbsp;*</label><select class=mainForm name=field_3 id=field_3><option value=''></option><option value="zapatos">zapatos</option><option value="carros">carros</option></select></li-->
 
 				<!--li class="mainForm" id="fieldBox_5">
 					<label class="formFieldQuestion">Field question 5&nbsp;*</label><span><input class=mainForm type=radio name=field_5 id=field_5_option_1 value="dos" /><label class=f2ormFieldOption for="field_5_option_1">dos</label></span></li>
@@ -401,18 +413,6 @@
 				<li class="mainForm" id="fieldBox_8">
 					<label class="formFieldQuestion">Field question 8&nbsp;*</label><input class=mainForm type=file name=field_8 id=field_8 value=""></li-->
 
-				<li class="mainForm" id="fieldBox_9">
-					<label class="formFieldOption" name=mail id=mail>Correo electrónico</label>
-					<input class=mainForm type=email name=mailv id=mailv size=50 value="" style="background-image:url(img/email.png); background-repeat: no-repeat;  padding: 2px 2px 2px 25px;"></li>
-
-				<li class="mainForm" id="fieldBox_10">
-					<label class="formFieldQuestion" name=telv id=telv>Teléfono</label>
-					<input class=mainForm type=phone name=telv id=telv size=50 value="" style="background-image:url(img/phone.png); background-repeat: no-repeat;  padding: 2px 2px 2px 25px;"></li>
-
-				<li class="mainForm" id="Li1">
-					<label class="formFieldOption" name=celv id=celv>Cel</label>
-					<input class=mainForm type=phone name=celv id=celv size=50 value="" style="background-image:url(img/phone.png); background-repeat: no-repeat;  padding: 2px 2px 2px 25px;"></li>
-
 				<!--li class="mainForm" id="fieldBox_11">
 					<label class="formFieldQuestion">Field question 11&nbsp;*</label><input class=mainForm type=website name=field_11 id=field_11 size=20 value="" style="background-image:url(img/website.png); background-repeat: no-repeat;  padding: 2px 2px 2px 25px;"></li>
 
@@ -425,10 +425,8 @@
 		<!-- end of this page -->
 
 		<!-- next page buttons -->
-		    <li class="mainForm">
-			</li>
             <li class="mainForm">
-                <input id="saveForm" class="mainForm" type="submit" value="Submit" />
+                <input id="saveForm" class="mainForm" type="button" value="Submit2" onclick="Almacena();"/>
             </li>
 		</ul>
 		</form>
@@ -442,10 +440,6 @@
     $("#wifi")[0].hidden = !RedDisponible;
     //alert(RedDisponible);
     Textos();
-    var F = "Version 0.1 Copyright (C) Feb 4, 2014";
-    document.getElementById("footerT").innerHTML = F;
-    document.getElementById("footerT2").innerHTML = F;
-    document.getElementById("footerC").innerHTML = F;
 </script>
     </body>
 </html>
