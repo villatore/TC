@@ -4,7 +4,8 @@ var l8n = {
         "#ajustes": "Settings",
         "#per": "Rol",
         "#sal" : "Exit",
-        "#ttipnombre": "Tooltip test...",
+        "#ttipnombre": "Please, write your full name as you want appear in the ticket",
+        "#ttiprfc": "Please, write your I.D. for the taxes",
         "#AyudaDatosPersonales": "Your data will be used for deliver or ticket",
         "#saveForm": "Save",
         "#msjValidaForma": "Please correct the errors.  Fields marked with red color are required"
@@ -16,7 +17,8 @@ var l8n = {
         "#ajustes": "Ajustes",
         "#per": "Perfil",
         "#sal" : "Salida",
-        "#ttipnombre": "Prueba del Tooltip...",
+        "#ttipnombre": "Favor de escribir su nombre completo, como quiera que aparezca en la factura",
+        "#ttiprfc": "Favor de escribir su RFC de forma correcta",
         "#AyudaDatosPersonales": "Sus datos son para facturación o entrega a domicilio",
         "#saveForm": "Salvar",
         "#msjValidaForma": "Por favor capture los datos requeridos, remarcados en rojo"
@@ -34,6 +36,7 @@ function Textos() {
     Etiqueta("#per");
     Etiqueta("#sal");
     Etiqueta("#ttipnombre");
+    Etiqueta("#ttiprfc");
     Etiqueta("#AyudaDatosPersonales");
     Etiqueta("#saveForm");
     EtiquetaTag("footerT", "#version");

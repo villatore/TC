@@ -1,7 +1,7 @@
 function MuestraEntrega(){
     if (!$ge('mismodomv').checked) {
         expandElem('domicilioEntregav');
-        $ge('domicilioEntregav').value = $ge('domiciliov').value
+        //$ge('domicilioEntregav').value = $ge('domiciliov').value
     } else
         collapseElem('domicilioEntregav');
 }
@@ -136,7 +136,8 @@ function validateDate(fieldId, fieldBoxId, fieldType, required,  minDateStr, max
 function validaPagina()
 {
 	retVal = true;
-	if (!validateField('nombrev', 'text', 1)) retVal=false;
+	if (!validateField('nombrev', 'text', 1)) retVal = false;
+	if (!validateField('rfcv', 'text', 0)) retVal = false;
     if (!validateField('domiciliov', 'textarea', 1)) retVal=false;
     if (!validateField('telv', 'phone', 1)) retVal=false;
     if ($ge('mailv').value != '')
@@ -175,6 +176,7 @@ function Almacena() {
     if (validaPagina()) {
         var DatosPersonales = JSON.parse("{}");
         DatosPersonales.nombrev = $ge('nombrev').value;
+        DatosPersonales.rfcv = $ge('rfcv').value;
         DatosPersonales.domiciliov = $ge('domiciliov').value;
         DatosPersonales.domicilioEntregav = $ge('domicilioEntregav').value;
         DatosPersonales.mailv = $ge('mailv').value;
@@ -183,8 +185,22 @@ function Almacena() {
 
         //se carga el carrito de la tienda, para poder agregarle
         //var CarritoTienda = JSON.parse(localStorage.getItem(Partesurl[i]));
-        //window.localStorage.setItem(nombreCarrito, JSON.stringify(CarritoTienda));
-        alert(JSON.stringify(DatosPersonales));
-        alert("todo se guardoooo");
+        window.localStorage.setItem("ToruzCart_Persona", JSON.stringify(DatosPersonales));
+        $ge("AvisoSalvado").innerHTML = "Sus datos fueron almacenados, gracias";
     }
+}
+function CargaInfoDP() {
+    var DatosPersonales = JSON.parse(localStorage.getItem('ToruzCart_Persona'));
+     $ge('nombrev').value = DatosPersonales.nombrev;
+     $ge('rfcv').value = DatosPersonales.rfcv;
+     $ge('domiciliov').value = DatosPersonales.domiciliov;
+     $ge('domicilioEntregav').value = DatosPersonales.domicilioEntregav;
+     $ge('mailv').value = DatosPersonales.mailv;
+     $ge('telv').value = DatosPersonales.telv;
+     $ge('celv').value = DatosPersonales.celv;
+     if (DatosPersonales.domiciliov == DatosPersonales.domicilioEntregav)
+         $ge('mismodomv').checked = true;
+     else
+         $ge('mismodomv').checked = false;
+     MuestraEntrega();
 }

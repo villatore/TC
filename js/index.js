@@ -426,7 +426,7 @@ var z=0;
         $('.detailPayments').listview('refresh');
     });
     $(document).on("pageinit", "#Datos_Personales", function () {
-        CargaInfo();
+        CargaInfoDP();
         $('.Datos_Personales').listview({
             countTheme: "b",
             dividerTheme: "a",
@@ -444,7 +444,7 @@ function GEOL(){
 // Run after successful transaction
 // Let's display the position data
 function onSuccessGeo(position) {
-    var geoElement = document.getElementById('geolocationData');
+    var geoElement = $ge('geolocationData');
     geoElement.innerHTML =
     'Latitude: ' + position.coords.latitude + '<br />' +
     'Longitude: ' + position.coords.longitude + '<br />' +
@@ -487,6 +487,5 @@ function onErrorGeo(error) {
         }//case
     }//if
     // Handle any errors we may face
-    document.getElementById('geolocationData').innerHTML = errString;
+    $ge('geolocationData').innerHTML = errString;
 }//fin
-var RedDisponible = true;

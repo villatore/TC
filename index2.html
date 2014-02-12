@@ -359,7 +359,7 @@
             <h1>Datos Personales</h1>
         </div>
         <h4><a id=AyudaDatosPersonales></a></h4>
-        <!--div data-role="content"-->
+        <center><div id="AvisoSalvado" class="MsjExitos"></div></center>        
 <!------>
 		<!-- begin form -->
 		<form method=post enctype=multipart/form-data">
@@ -370,13 +370,18 @@
 					<input class=mainForm type=text name=nombrev id=nombrev size='50' value=''>
 				</li>
 				<li class="mainForm">
+					<label class="formFieldOption" name=rfc id=rfc>RFC</label>
+					<a class=info href=#><img src=img/tip_small.png border=0><span class=infobox id="ttiprfc"></span></a>
+					<input class=mainForm type=text name=rfcv id=rfcv size='20' value=''>
+				</li>
+				<li class="mainForm">
 					<label class="formFieldQuestion" nombre=domicilio id=domicilio>Domicilio</label>
 					<textarea class=mainForm  name=domiciliov id=domiciliov rows=10 cols=80></textarea></li>
 
 				<li class="mainForm">
 					<label class="formFieldQuestion" name=mismodom id=mismodom>Mismo domicilio para entrega</label><br>
 					<input class=mainForm type=checkbox name=mismodomv id=mismodomv value="1" checked onchange="MuestraEntrega()" />
-                        <textarea class=mainForm  name=domicilioEntregav id=domicilioEntregav rows=10 cols=80 style="visibility: hidden"></textarea>
+                        <textarea class=mainForm  name=domicilioEntregav id=domicilioEntregav rows=10 cols=50 style="visibility: hidden"></textarea>
 					</li>
 
 				<li class="mainForm">
@@ -433,11 +438,17 @@
 		<!-- end of form -->
 <!------>
 		<img src="img/cartmas.jpg" onclick="AgregaCarro();"/>
-        <!--/div-->
     </div>
 
 <script>
-    $("#wifi")[0].hidden = !RedDisponible;
+    if (RedDisponible) {
+        $ge("wifi").style.display = 'none';
+        $ge("wifi").style.visibility = 'hidden';
+    } else {
+        $ge("wifi").style.display = '';
+        $ge("wifi").style.visibility = '';
+    }
+    console.log("LLV --- RedDisponible:" + RedDisponible);
     //alert(RedDisponible);
     Textos();
 </script>
