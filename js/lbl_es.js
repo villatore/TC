@@ -1,6 +1,6 @@
 var l8n = {
     "en-US": {
-        "#version": "Version 0.0.1en-Copyright (C) Feb 4, 2014",
+        "#version": "Version 0.0.1en-Copyright (C) Feb 12, 2014",
         "#ajustes": "Settings",
         "#per": "Rol",
         "#sal" : "Exit",
@@ -13,7 +13,7 @@ var l8n = {
     "es": { //español
     },
     "es-419": { //español - latinoamerica
-        "#version": "Version 0.0.1es- Copyright (C) Feb 4, 2014",
+        "#version": "Version 0.0.1es- Copyright (C) Feb 12, 2014",
         "#ajustes": "Ajustes",
         "#per": "Perfil",
         "#sal" : "Salida",
@@ -31,53 +31,54 @@ var l8n = {
 
 function Textos() {
     l8n["es"] = l8n["es-419"];
-    Etiqueta("#version");
-    Etiqueta("#ajustes");
-    Etiqueta("#per");
-    Etiqueta("#sal");
-    Etiqueta("#ttipnombre");
-    Etiqueta("#ttiprfc");
-    Etiqueta("#AyudaDatosPersonales");
-    Etiqueta("#saveForm");
+    PoneEtiquetas();
     EtiquetaTag("footerT", "#version");
     EtiquetaTag("footerT2", "#version");
     EtiquetaTag("footerC", "#version");
 }
 function Etiqueta(key) {
-    var lenguaje = "en-US"; //idioma por default
-    if (l8n[window.navigator.language])
-        lenguaje = window.navigator.language;
+    var lenguaje = DeterminaIdioma();
 
-    /*Probar esto
-    var i = 0;
-    for (i = 0; size_object(l8n[lenguaje]); i++) {
-    var key = l8n[lenguaje][i];
-    document.querySelector(key).textContent = l8n[lenguaje][key];
-    }*/
-
+    //Si no existe elemento html con id igual a key, no continua
+    if (document.querySelector(key) == null) return;
+    
     if (window.navigator && l8n[lenguaje]) {
-        document.querySelector(key).textContent = l8n[lenguaje][key];
         if (document.querySelector(key).type == "button")
             document.querySelector(key).value = l8n[lenguaje][key];
+        else
+            document.querySelector(key).textContent = l8n[lenguaje][key];
     }
 }
+function PoneEtiquetas() {
+    var lenguaje = DeterminaIdioma();
+
+    for (var key in l8n[lenguaje]) {
+        Etiqueta(key);
+    }
+}
+
 function EtiquetaTag(control,key) {
-    var lenguaje = "en-US"; //idioma por default
-    if (l8n[window.navigator.language])
-        lenguaje = window.navigator.language;
+    var lenguaje = DeterminaIdioma();
 
     if (window.navigator && l8n[lenguaje]) {
         $ge(control).innerHTML = l8n[lenguaje][key];
     }
 }
 function EtiquetaReturn(key) {
-    var lenguaje = "en-US"; //idioma por default
-    if (l8n[window.navigator.language])
-        lenguaje = window.navigator.language;
+    var lenguaje = DeterminaIdioma();
 
     if (window.navigator && l8n[lenguaje]) {
         return l8n[lenguaje][key];
     }
+}
+function DeterminaIdioma() {
+    //var lenguaje = "en-US"; //idioma por default
+    var lenguaje = "es"; //idioma por default
+    if (l8n[window.navigator.language]) {
+        // quitar para la versión final, trabajará con el idioma del navegador, pero pulir todas las etiquetas html
+        //lenguaje = window.navigator.language;
+    }
+    return lenguaje;
 }
 /**
 *

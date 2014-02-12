@@ -191,6 +191,8 @@ function Almacena() {
 }
 function CargaInfoDP() {
     var DatosPersonales = JSON.parse(localStorage.getItem('ToruzCart_Persona'));
+    if (DatosPersonales == null) return;
+
      $ge('nombrev').value = DatosPersonales.nombrev;
      $ge('rfcv').value = DatosPersonales.rfcv;
      $ge('domiciliov').value = DatosPersonales.domiciliov;
