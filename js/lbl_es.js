@@ -1,6 +1,6 @@
 var l8n = {
     "en-US": {
-        "#version": "Version 0.0.1en-Copyright (C) Feb 12, 2014",
+        "#version": "Version 0.0.1en-Copyright (C) Feb 13, 2014",
         "#ajustes": "Settings",
         "#per": "Rol",
         "#sal" : "Exit",
@@ -13,7 +13,7 @@ var l8n = {
     "es": { //español
     },
     "es-419": { //español - latinoamerica
-        "#version": "Version 0.0.1es- Copyright (C) Feb 12, 2014",
+        "#version": "Version 0.0.1es- Copyright (C) Feb 13, 2014",
         "#ajustes": "Ajustes",
         "#per": "Perfil",
         "#sal" : "Salida",
