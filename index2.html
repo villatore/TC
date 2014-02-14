@@ -68,22 +68,16 @@
         // The scope of 'this' is the event. In order to call the 'receivedEvent'
         // function, we must explicity call 'app.receivedEvent(...);'
         onDeviceReady: function() {
+try{
+
             // as long as the connection type is not none,
             // the device should have Internet access
             if (navigator.network.connection.type != Connection.NONE) {
                 RedDisponible = true;
 
-                // determine whether this connection is high-speed
-                switch (navigator.network.connection.type) {
-                    case Connection.UNKNOWN:
-                    case Connection.CELL_2G:
-                        isHighSpeed = false;
-                        break;
-                    default:
-                        isHighSpeed = true;
-                        break;
-                }
-                console.log(">>>>>>>>" + navigator.network.connection.type);
+                console.log("1>>>>>>>>" + navigator.network.connection.type);
+                console.log("2>>>>>>>>" + navigator.connection.type);
+
                 if (RedDisponible) {
                     $ge("wifi").style.display = 'none';
                     $ge("wifi").style.visibility = 'hidden';
@@ -97,6 +91,10 @@
                 RedDisponible = false;
                 //alert("Su dispositivo no cuenta con internet");
             }
+}
+catch (e) {
+    console.log(e);
+}
         }
     };
     function LlamadaEcho() {

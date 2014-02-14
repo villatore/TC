@@ -37,7 +37,8 @@ function Muestra() {
     }
 
     $.mobile.changePage('#paymentsDetails');
-    readSinglePost($("#qrSKU")[0].value);
+    //if (RedDisponible)
+        readSinglePost($("#qrSKU")[0].value);
 
     function readSinglePost(Ruta) {
         LimpiaProducto();
@@ -98,7 +99,49 @@ console.log('falla.............'  + data);
 
 }; // fin readSinglePost
 
-};
+}; // fin function Muestra()
+
+function readLocalPost(Ruta) {
+    LimpiaProducto();
+    escribeEstado("Consultando .... ");
+    Resta();
+    //Se busca a que tienda pertenece la mercancia para tener carritos por tienda, basado en el url del producto, el nombre del carro es el nombre del sitio y/o subdominio
+    var Partesurl = Ruta.split("/");
+    var nombreCarrito = "";
+    for (var i = 0; i < Partesurl.length; i++) {
+        if (Partesurl[i].indexOf(".com") > 0) {
+            nombreCarrito = "" + Partesurl[i];
+            break;
+        }
+    }
+    //se carga el carrito de la tienda, para poder buscarlo localmente
+    var CarritoTienda = JSON.parse(localStorage.getItem(nombreCarrito));
+
+    //se valida si tiene contenido
+    if (!(CarritoTienda === null || CarritoTienda === undefined)) {
+        for (var i = 0; i < CarritoTienda.length; i++) {
+            if (!(Ruta.match(CarritoTienda[i].url) === null)) {
+                Post = CarritoTienda[i];
+                $("#categoria").html(Post.taxonomy_product_cat[0].title);
+                $("#titulo").html(Post.title);
+                document.getElementById("imgs").src = Post.thumbnail.replace(/"\"/g, "");
+                $("#descripcion").html("<h2>Descripcion del Producto</h2>" + Post.excerpt);
+                $("#contenido").append(Post.content);
+                $("#contenido").append("<small><br>");
+                $("#actualizacion").html("Ultima actualizacion: " + Post.modified);
+                $("#contenido").append("</small>");
+                $("#cantidad")[0].innerHTML = Post.MovilCantidad
+                //                        $("#precio").html(data.page.custom_fields.mp_sale_price);
+                $("#precio").html(addCommas(Post.id));
+                $("#unidad").html(Post.comment_status);
+                break;
+            }
+        }
+    }
+    $.mobile.changePage('#paymentsDetails');
+    escribeEstado("");
+}
+
 function escribeEstado(Texto) {
     $("#estado").html(Texto);
 }

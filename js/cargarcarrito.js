@@ -22,8 +22,8 @@ function CargaCarro() {
                     contenidoP = contenidoP + "<table data-role='listview' width='90%' border=0>";
                     for (var ii = 0; ii < ProdsCarrito.length; ii++) {
                         var P = ProdsCarrito[ii];
-                        contenidoP = contenidoP + "<tr><td width='5%' onclick=MuestraP('" + P.url + "'," + P.MovilCantidad + ");>";
-                        contenidoP = contenidoP + "<a onclick=MuestraP('" + P.url + "'," + P.MovilCantidad + "); data-transition='slide' class='icon-search' style='font-size: 20px'></a></td>";
+                        contenidoP = contenidoP + "<tr><td width='5%' onclick=readLocalPost('" + P.url + "');>";
+                        contenidoP = contenidoP + "<a onclick=readLocalPost('" + P.url + "'); data-transition='slide' class='icon-search' style='font-size: 20px'></a></td>";
                         contenidoP = contenidoP + "<td width='10%'>" + P.title.trim() + "</td>"; //nombre P
                         contenidoP = contenidoP + "<td width='10%'>$" + addCommas(P.id) + "</td>"; //Precio P
                         contenidoP = contenidoP + "<td width='10%'>" + P.MovilCantidad + " " + P.comment_status + "</td>"; //unidades y medida
@@ -46,11 +46,7 @@ function CargaCarro() {
 
 }
 function MuestraP(Producto, ProductoC) {
-    $("#qrSKU")[0].value = Producto + "?json=get_post&dev=1";
-    $("#cantidad")[0].innerHTML = ProductoC;
-    Muestra();
-    $("#cantidad")[0].innerHTML = ProductoC;
-    Suma();
+    readLocalPost(Producto);
 }
 function BorrarP(Tienda, Producto, prods) {
     //se reutiliza esta rutina para borrar todos los productos, solo Producto=0 y todos los productos a borrar prods
