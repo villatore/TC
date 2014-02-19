@@ -9,7 +9,6 @@
     </author>
   <preference name="phonegap-version" value="2.9.0" />
   <!--plugin name="NetworkStatus" value="org.apache.cordova.NetworkManager" /-->
-  <plugin name="Echo" value="com.test.testPlugin.Echo" />
 	<content src="index.html"/>
     <access origin="*" />
     <!--access origin="http://127.0.0.1*" /-->

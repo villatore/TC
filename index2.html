@@ -60,23 +60,13 @@
         onDeviceReady: function() {
 try{
 
+                console.log("1>>>>>>>>" + navigator.network.connection.type);
+                console.log("2>>>>>>>>" + navigator.connection.type);
+
             // as long as the connection type is not none,
             // the device should have Internet access
             if (navigator.network.connection.type != Connection.NONE) {
                 RedDisponible = true;
-
-                console.log("1>>>>>>>>" + navigator.network.connection.type);
-                console.log("2>>>>>>>>" + navigator.connection.type);
-
-                if (RedDisponible) {
-                    $ge("wifi").style.display = 'none';
-                    $ge("wifi").style.visibility = 'hidden';
-                } else {
-                    $ge("wifi").style.display = '';
-                    $ge("wifi").style.visibility = '';
-                }
-                console.log("LLV --- RedDisponible:" + RedDisponible);
-                LlamadaEcho();
             } else {
                 RedDisponible = false;
                 //alert("Su dispositivo no cuenta con internet");
@@ -85,14 +75,19 @@ try{
 catch (e) {
     console.log(e);
 }
+                console.log("LLV --- RedDisponible:" + RedDisponible);
+                console.log("$ge('wifi').style.display:" + $ge("wifi").style.display);
+                console.log("$ge('wifi').style.visibility:" + $ge("wifi").style.visibility);
+                if (RedDisponible) {
+                    $ge("wifi").style.display = 'none';
+                    $ge("wifi").style.visibility = 'hidden';
+                } else {
+                    $ge("wifi").style.display = '';
+                    $ge("wifi").style.visibility = '';
+                }
+
         }
     };
-    function LlamadaEcho() {
-        window.echo27("echome14", function(echoValue) {
-            console.log("AQUI 2");
-            alert(echoValue == "echome"); // should alert true.
-        });
-    }
 </script>
 
     <div data-role="page" id="i2ndex">
