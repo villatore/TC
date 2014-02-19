@@ -46,19 +46,9 @@
             FastClick.attach(document.body);
             $.mobile.changePage('#home');
             GEOL();
-            return;
-            //var json = '{"login":"Correcto","userId":"0567","userName":"GABRIELA GUADALUPE GUEVARA SANCHEZ","userSex":"FEMENINO","userEmail":"gguevara@intelis.com","userUrlImage":null,"userAdmin":0} ';
-            if (localStorage.getItem('user') === null) {
-                $('#intelisis').crm20();
-                //localStorage.setItem('user') 
-                localStorage.setItem("user", JSON.stringify(json));
-            } else {
-                $.mobile.changePage('#home');
-            }
         });
-    </script>
-<script >
-    var app = {
+
+		var app = {
         // Application Constructor
         initialize: function() {
             document.addEventListener('deviceready', this.onDeviceReady, false);
@@ -98,9 +88,9 @@ catch (e) {
         }
     };
     function LlamadaEcho() {
-        window.echo("echome14", function(echoValue) {
+        window.echo27("echome14", function(echoValue) {
             console.log("AQUI 2");
-            navigator.notification.alert(echoValue == "echome"); // should alert true.
+            alert(echoValue == "echome"); // should alert true.
         });
     }
 </script>
